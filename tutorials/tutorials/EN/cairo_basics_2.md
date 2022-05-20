@@ -154,7 +154,7 @@ With that said, let's see what a function with an implicit argument looks like. 
 %builtins output
 
 func serialize_word{output_ptr : felt*}(word : felt):
-    assert [output_ptr] = value
+    assert [output_ptr] = word
     let output_ptr = output_ptr + 1
     # The new value of output_ptr is implicitly
     # added in return.
