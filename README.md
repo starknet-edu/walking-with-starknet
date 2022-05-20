@@ -1,9 +1,7 @@
 # Cairo Tutorials
 
-**Get started with Cairo with this simple tutorial.
-Complete the puzzles/exercises, get tokens and learn about StarkNet smart contracts!**
-**A mandarin version is available 中文版本请查看这里[here](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin)**
-​
+Cairo tutorials for learning step by step.
+
 ## Languages
 
 We aim to reach as many Cairo developers as possible. Open a PR if you wish to translate into your own language.
