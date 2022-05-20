@@ -2,15 +2,15 @@
 
 Cairo tutorials for learning step by step.
 
-## Languages
-
-We aim to reach as many Cairo developers as possible. Open a PR if you wish to translate into your own language.
+## Tutorials
 
 |  Language |                                                     Source                                                     | Contributors                                    |
 |:---------:|:--------------------------------------------------------------------------------------------------------------:|-------------------------------------------------|
 |  English  |  [ `tutorials/EN` ](https://github.com/omarespejel/cairo-educational-toolkit/tree/main/tutorials/tutorials/EN) | @[omarespejel](https://github.com/omarespejel)  |
 |  Spanish  | [ `tutorials/ES` ]( https://github.com/omarespejel/cairo-educational-toolkit/tree/main/tutorials/tutorials/ES) | @[omarespejel](https://github.com/omarespejel)  |
 | Potuguese | [ `tutorials/PT` ]( https://github.com/omarespejel/cairo-educational-toolkit/tree/main/tutorials/tutorials/PT) | @[omarespejel](https://github.com/omarespejel)  |
+
+We aim to reach as many Cairo developers as possible. Open a PR if you wish to translate into your own language.
 
 ## Disclaimer
 
