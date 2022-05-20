@@ -1,4 +1,4 @@
-# **Programming on Ethereum's L2: Cairo Basics pt. one**
+# **Programming on Ethereum's L2: Cairo Basics pt. 1**
 
 🚀 The future of Ethereum is today and it's already here. Let's learn how to use an ecosystem that:
 
