@@ -2,7 +2,7 @@
 
 Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [tutorial pasado](tutorial_1.md).
 
-Únete a la comunidad de habla hispana de StarkNet (linktree). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este. En el primero preparamos nuestro equipo para programar en Cairo; en el segundo y tercer tutorial revisamos los básicos de la programación en Cairo.
+Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este. 
 
 🚀 El futuro de Ethereum es hoy y ya está aquí. Y apenas es el comienzo. Aprende un poco más sobre el ecosistema de Starkware en [este texto corto](https://mirror.xyz/espejel.eth/PlDDEHJpp3Y0UhWVvGAnkk4JsBbJ8jr1oopGZFaRilI).
 
@@ -16,7 +16,7 @@ Aquí está nuestra código para sumar dos números. Puedes pegarlo directamente
 
 No te preocupes si no entiendes en este punto todo lo que está sucediendo. Pero [@espejelomar](https://twitter.com/espejelomar) se preocupará si al final del tutorial no comprendes cada línea de este código. Avísame si es así porque mejoraremos 🧐. Cairo es un lenguaje low-level por lo que será más díficil que aprender Python, por ejemplo. Pero valdrá la pena 🥅. Ojos en la meta.
 
-Veamos línea por línea y con ejemplos adicionales lo que estamos haciendo. El programa entero para sumar los dos números está disponible en [src/sum2Numeros.cairo](../../../src/sum2Numeros.cairo). Ahí encontrarás el código correctamente comentado.
+Veamos línea por línea y con ejemplos adicionales lo que estamos haciendo. El programa entero para sumar los dos números está disponible en [src/suma.cairo](../../../src/suma.cairo). Ahí encontrarás el código correctamente comentado.
 
 ```python
 func suma_dos_nums(num1: felt, num2: felt) -> (suma: felt) {
@@ -42,7 +42,7 @@ func main{output_ptr: felt*}(){
 
 Al comienzo de nuestro programa en Cairo escribimos `%builtins output`. Aquí estamos diciendo al compilador de Cairo que usaremos el `builtin` llamado `output`. La definición de `builtin` es bastante técnica y sale del alcance de este primer tutorial ([aquí esta](https://www.cairo-lang.org/docs/how_cairo_works/builtins.html#builtins) en la documentación). Por el momento, nos basta indicar que podemos convocar capacidades especiales de Cairo a través de los builtins. Si sabes C++ seguramente ya encontraste las similitudes.
 
-> El builtin output es lo que permite que el programa se comunique con el mundo exterior. Puedes considerarlo como el equivalente de `print()` en Python o `std::cout` de C++ ([XXX poner link]documentación de Cairo).
+> El builtin output es lo que permite que el programa se comunique con el mundo exterior. Puedes considerarlo como el equivalente de `print()` en Python o `std::cout` de C++ ([documentación de Cairo](https://www.cairo-lang.org/docs/hello_cairo/intro.html#writing-a-main-function)).
 > 
 
 La interacción entre `builtin` `output` y la función `serialize_word`, que importamos previamente, nos permitirá imprimir a la consola. En este caso con `serialize_word(sum)`. No te preocupes, más adelante lo veremos más de cerca.
@@ -252,10 +252,10 @@ let (sum) = suma_dos_nums(num1 = NUM1, num2 = NUM2)
 
 Las herramientas que ofrece StarkNet para interactuar con la línea de comando son muchas 🙉. No entraremos en detalle hasta más adelante. Por ahora, solo mostraremos los comandos con los que podremos correr la aplicación que creamos en este tutorial 🧘‍♀️. Pero no te preocupes, los comandos para correr otras aplicaciones serán muy similares.
 
-`cairo-compile` nos permite compilar nuestro código y exportar un json que leeremos en el siguiente comando. Si nuestro se llama `src/sum2Numeros.cairo` (porque se encuentra en el directorio `src` como en este repositorio) y queremos que el json se llame `build/suma.json` (porque se encuentra en el directorio `build` como en este repositorio) entonces usaríamos el siguiente código:
+`cairo-compile` nos permite compilar nuestro código y exportar un json que leeremos en el siguiente comando. Si nuestro se llama `src/suma.cairo` (porque se encuentra en el directorio `src` como en este repositorio) y queremos que el json se llame `build/suma.json` (porque se encuentra en el directorio `build` como en este repositorio) entonces usaríamos el siguiente código:
 
 ```
-cairo-compile src/sum2Numeros.cairo --output build/suma.json`
+cairo-compile src/suma.cairo --output build/suma.json`
 ```
 
 Sencillo, cierto? ❤️

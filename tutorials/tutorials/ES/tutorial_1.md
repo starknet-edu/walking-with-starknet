@@ -1,7 +1,7 @@
 
 # Programando en la L2 de Ethereum (pt. 1): Intalando Cairo y StarkNet
 
-Únete a la comunidad de habla hispana de StarkNet (linktree). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. En el primero preparamos nuestro equipo para programar en Cairo; en el segundo y tercer tutorial revisamos los básicos de la programación en Cairo.
+Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. En el primero preparamos nuestro equipo para programar en Cairo; en el segundo y tercer tutorial revisamos los básicos de la programación en Cairo.
 
 🚀 El futuro de Ethereum es hoy y ya está aquí. Y apenas es el comienzo.
 
@@ -122,7 +122,7 @@ Debido a que Cairo y StarkNet solo se encuentran disponibles para Ubuntu y MacOS
 
 ## 2. VSCode para tu Cairo 𓀀
 
-Si escribes `cairo` en el buscador de plugins de VSCode (aquí (XXX poner link) tutorial sobre cómo instalar plugins) te aparecerán solo dos. Estamos comenzando 🚀:
+Si escribes `cairo` en el buscador de plugins de VSCode ([aquí](https://code.visualstudio.com/docs/editor/extension-marketplace#:~:text=You%20can%20browse%20and%20install,on%20the%20VS%20Code%20Marketplace.)) tutorial sobre cómo instalar plugins) te aparecerán solo dos. Estamos comenzando 🚀:
 
 Ambas extensiones son útiles.
 
@@ -134,6 +134,8 @@ Recomiendo instalar ambas en tu VSCode.
 
 Ahora verás que tu código en Cairo se ve mucho mejor, es más fácil de leer y te retorna errores en tiempo real. No tienes que esperar a compilar tu código para observar si tiene errores 🥳.
 
+Excelente, tu equipo está listo para crear con Cairo y StarkNet 🚀.
+
 
 ## 3. Conclusión
 
@@ -143,4 +145,4 @@ En el siguiente tutorial aprenderemos los básicos de Cairo 🥳. Usaremos todo 
 
 En los siguientes tutoriales aprenderemos más sobre los pointers y el manejo de la memoria; la common library de cairo; cómo funciona el compilador de Cairo; y más!
 
-Cualquier comentario o mejora por favor comentar con @espejelomar 🌈.
+Cualquier comentario o mejora por favor comentar con [@espejelomar](https://twitter.com/espejelomar) o haz un PR 🌈.

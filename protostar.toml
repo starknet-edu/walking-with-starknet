@@ -6,5 +6,26 @@ libs_path = "lib"
 
 ["protostar.contracts"]
 suma = [
-    "src/sum2Numeros.cairo",
+    "src/suma.cairo",
+]
+multiplicacion = [
+    "src/multiplicacion.cairo",
+]
+division1 = [
+    "src/division1.cairo",
+]
+division2 = [
+    "src/division2.cairo",
+]
+felts1 = [
+    "src/felts1.cairo",
+]
+asserts = [
+    "src/asserts.cairo",
+]
+vector = [
+    "src/vector.cairo",
+]
+matrix = [
+    "src/matrix.cairo",
 ]
