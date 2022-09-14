@@ -1,6 +1,6 @@
-# Cairo Tutorials
+# Cairo and StarkNet Tutorials
 
-Cairo tutorials for learning step by step.
+Learn your way into the scalability of Ethereum; step by step and in community. 
 
 ## Tutorials
 
@@ -12,12 +12,14 @@ Cairo tutorials for learning step by step.
 
 We aim to reach as many Cairo developers as possible. Open a PR if you wish to translate into your own language.
 
-## Disclaimer
+## Contribute
 
-​Tutorials adapt content from several sources such as the amazing [Cairo documentation](https://www.cairo-lang.org/docs/hello_cairo/intro.html) and [StarkNets's Workshop in Amsterdam 2022](https://www.youtube.com/watch?v=O2zntD0muZs&t=6061s).​
+Your contribution would be highly appreciated. Cairo and StarkNet are evolving frameworks; thus any contribution to keep these tutorials updated and ready would be of high value. 
 
-
-## Providing feedback
-
-Your feedback would be greatly appreciated.Do you have a question? Join our [Discord server](https://discord.gg/B7PevJGCCw), register and join channel #tutorials-support
+Contribution examples:
+* Translate to your language.
+* Update tutorials to new Cairo and StarkNet versions.
+* Add examples or additional details to the tutorials.
+* Fix errors or typos.
+* Additional tutorials.
 
