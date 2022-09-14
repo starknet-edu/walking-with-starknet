@@ -1,19 +1,14 @@
-# **Programando en la L2 de Ethereum: Básicos de Cairo pt. 2**
+# Programando en la L2 de Ethereum (pt. 2): Básicos de Cairo 1
 
-Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [tutorial pasado](cairo_basics_1.md).
+Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [tutorial pasado](tutorial_1.md).
 
-Únete al [mayor Meetup](https://www.meetup.com/fr-FR/starknet_latam/) de habla hispana sobre StarkNet y al naciente [Telegram](https://t.me/starknet_es). Saluda en el el canal `#🌮-español` en el [Discord](https://discord.gg/uJ9HZTUk2Y) de StarkNet.
+Únete a la comunidad de habla hispana de StarkNet (linktree). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este. En el primero preparamos nuestro equipo para programar en Cairo; en el segundo y tercer tutorial revisamos los básicos de la programación en Cairo.
 
-🚀 El futuro de Ethereum es hoy y ya está aquí. Vamos a aprender a usar un ecosistema que:
-
-- Sostiene a [dYdX](https://dydx.exchange/), DeFi que ya hizo cuatrocientos billones de trades y representa alrededor de un cuarto del total de las transacciones hechas en ethereum. Funcionan apenas desde hace 18 meses y constantemente [vencen a Coinbase](https://www.coinspeaker.com/dydx-coinbase-trade-volume/) en volumen de trades. Redujeron el precio de las transacciones de 500 a 1,000 veces. Son tan baratas que no necesitan cobrar el gas a los usuarios 💸.
-- De la semana del 7 al 13 de marzo de 2022, por primera vez, logró tener 33% más transacciones que Ethereum 💣.
-
-Y apenas es el comienzo. Aprende un poco más sobre el ecosistema de Starkware en [este texto corto](https://mirror.xyz/espejel.eth/PlDDEHJpp3Y0UhWVvGAnkk4JsBbJ8jr1oopGZFaRilI).
+🚀 El futuro de Ethereum es hoy y ya está aquí. Y apenas es el comienzo. Aprende un poco más sobre el ecosistema de Starkware en [este texto corto](https://mirror.xyz/espejel.eth/PlDDEHJpp3Y0UhWVvGAnkk4JsBbJ8jr1oopGZFaRilI).
 
 ---
 
-## **1. Sumar dos números**
+## 1. Sumar dos números
 
 Para aprender los básicos de Cairo crearemos juntos una función para sumar dos números 🎓. El código es muy sencillo pero nos ayudará a entender mejor muchos conceptos de Cairo. Nos basaremos fuertemente en la [documentación de Cairo](https://www.cairo-lang.org/docs/). La documentación es excelente al día de hoy no está lista para fungir como un tutorial estructurado para principiantes. Aquí buscamos solucionar esto 🦙.
 
@@ -21,42 +16,38 @@ Aquí está nuestra código para sumar dos números. Puedes pegarlo directamente
 
 No te preocupes si no entiendes en este punto todo lo que está sucediendo. Pero [@espejelomar](https://twitter.com/espejelomar) se preocupará si al final del tutorial no comprendes cada línea de este código. Avísame si es así porque mejoraremos 🧐. Cairo es un lenguaje low-level por lo que será más díficil que aprender Python, por ejemplo. Pero valdrá la pena 🥅. Ojos en la meta.
 
-Veamos línea por línea y con ejemplos adicionales lo que estamos haciendo.
+Veamos línea por línea y con ejemplos adicionales lo que estamos haciendo. El programa entero para sumar los dos números está disponible en [src/sum2Numeros.cairo](../../../src/sum2Numeros.cairo). Ahí encontrarás el código correctamente comentado.
 
 ```python
-%builtins output
+func suma_dos_nums(num1: felt, num2: felt) -> (suma: felt) {
+    alloc_locals;
+    local sumando = num1+num2;
+    return (suma=sumando);
+}
 
-from starkware.cairo.common.serialize import serialize_word
+func main{output_ptr: felt*}(){
+    alloc_locals;
+    
+    const NUM1 = 1;
+    const NUM2 = 10;
 
-func suma_dos_nums(num1: felt, num2: felt) -> (sum):
-    alloc_locals
-    local sum = num1+num2
-    return(sum)
-end
-
-func main{output_ptr: felt*}():
-    alloc_locals
-
-    const NUM1 = 1
-    const NUM2 = 10
-
-    let (sum) = suma_dos_nums(num1 = NUM1, num2 = NUM2)
-    serialize_word(sum)
-    return ()
-end
+    let (suma) = suma_dos_nums(num1 = NUM1, num2 = NUM2);
+    serialize_word(suma);
+    return ();
+}
 
 ```
 
-## **2. Los builtins**
+## 2. Los builtins**
 
 Al comienzo de nuestro programa en Cairo escribimos `%builtins output`. Aquí estamos diciendo al compilador de Cairo que usaremos el `builtin` llamado `output`. La definición de `builtin` es bastante técnica y sale del alcance de este primer tutorial ([aquí esta](https://www.cairo-lang.org/docs/how_cairo_works/builtins.html#builtins) en la documentación). Por el momento, nos basta indicar que podemos convocar capacidades especiales de Cairo a través de los builtins. Si sabes C++ seguramente ya encontraste las similitudes.
 
-> El builtin output es lo que permite que el programa se comunique con el mundo exterior. Puedes considerarlo como el equivalente de print() en Python o std::cout de C++ (documentación de Cairo).
+> El builtin output es lo que permite que el programa se comunique con el mundo exterior. Puedes considerarlo como el equivalente de `print()` en Python o `std::cout` de C++ ([XXX poner link]documentación de Cairo).
 > 
 
 La interacción entre `builtin` `output` y la función `serialize_word`, que importamos previamente, nos permitirá imprimir a la consola. En este caso con `serialize_word(sum)`. No te preocupes, más adelante lo veremos más de cerca.
 
-## **3. Importando**
+## 3. Importando
 
 Cairo está contruido arriba de Python por lo que importar funciones y variables es exactamente igual. La línea `from starkware.cairo.common.serialize import serialize_word` está importando la función `serialize_word` que se encuentra en `starkware.cairo.common.serialize`. Para ver el código fuente de esta función basta con ir al repositorio en Github de `cairo-lang` ([link](https://github.com/starkware-libs/cairo-lang)). Por ejemplo, la función serialize se encuentra [aquí](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/serialize.cairo) dentro del repositorio. Esto te será útil para encontrar errores en el código o comprender más a fondo Cairo.
 
@@ -65,24 +56,24 @@ Cairo está contruido arriba de Python por lo que importar funciones y variables
 
 Así se importan varias funciones de una misma biblioteca: `from starkware.cairo.common.math import (assert_not_zero, assert_not_equal)`.
 
-## **4. Los field elements (felt)**
+## 4. Los field elements (felt)
 
 En Cairo cuando no se específica el type de una variable o argumento se le asigna automáticamente el tipo `felt`. En la [documentación de Cairo](https://www.cairo-lang.org/docs/hello_cairo/intro.html#the-primitive-type-field-element-felt) se entra en detalles técnicos sobre lo que es un `felt`. Para fines de este tutorial basta con decir que un `felt` funciona como un entero. En las divisiones podemos notar la diferencia entre los `felt` y los enteros. Sin embargo, citando la documentación:
 
 > En la mayor parte de tu código (a menos que tengas la intención de escribir un código muy algebraico), no tendrás que lidiar con el hecho de que los valores en Cairo son felts y podrá tratarlos como si fueran números enteros normales.
 > 
 
-## **5. Los struct (los diccionarios de Cairo?)**
+## 5. Los struct (los diccionarios de Cairo?)
 
 Además de los `felt`, tenemos otras estructuras a nuestra disposición (más detalles en la [documentación](https://www.cairo-lang.org/docs/reference/syntax.html#type-system)).
 
 Podemos crear nuestra propia estructura, estilo diccionario de Python:
 
 ```python
-struct MiStruct:
-    member primer_miembro : felt
-    member segundo_miembro : felt
-end
+struct MiStruct{
+    primer_miembro : felt,
+    segundo_miembro : felt,
+}
 
 ```
 
@@ -118,26 +109,27 @@ let b = tuple4[0][1][2]  # let b = 13.
 
 ```
 
-## **7. La estructura de las funciones y comentarios**
+## 7. La estructura de las funciones y comentarios
 
 La definición de una función en Cairo tiene el siguiente formato:
 
 ```python
-func función(arg1: felt, arg2) -> (retornado):
-  # Cuerpo de la función
-  return(retornado)
-end
+func función(arg1: felt, arg2) -> (retornado: felt){
+  // Cuerpo de la función
+  let (suma) = suma_dos_nums(num1 = NUM1, num2 = NUM2);
+  return(retornado=suma);
+}
 
 ```
 
-- **Definir el scope de la función** (alcance, en español). Comenzamos la función con `func` y la terminamos con `end`. Esto define el scope de nuestra función llamada `función`.
+- **Definir el scope de la función** (alcance, en español). Comenzamos la función con `func`. El scope de nuestra función se define con llaves {}.
 - **Argumentos y nombre**. Definimos los argumentos que recibe la función entre paréntesis a un lado del nombre que definimos para nuestra función, `función` en este caso. Los argumentos pueden llevar su type (tipo, en español) definido o no. En este caso `arg1` debe ser de type `felt` y `arg2` puede ser de cualquier type.
-- **Retornar**. Necesariamente tenemos que agregar `return()`. Aunque la función no esté regresando algo. En este caso estamos retornando una variable llamada `retornado` por lo que colocamos `return(retornado)`. Aún si no retornaramos nada tendríamos que agregar `return()`.
-- **Comentarios**. En Cairo comentamos con `#`. Este código no será interpretado al correr nuestro programa.
+- **Retornar**. Necesariamente tenemos que agregar `return()`. Aunque la función no esté regresando algo. En este caso estamos retornando una variable llamada `retornado` por lo que colocamos `return(retornado=suma)` donde suma es el valor que tomará la variable `retornado`.
+- **Comentarios**. En Cairo comentamos con `//`. Este código no será interpretado al correr nuestro programa.
 
 Como con otros lenguajes de programación. Necesitaremos una función `main()` que orqueste el uso de nuestro programa en Cairo. Se define exactamente igual a una función normal solo que con el nombre `main()`. Puede ir antes o después de las demás funciones que creamos en nuestro programa.
 
-## **8. Interactuando con pointers (punteros, en español): parte 1**
+## 8. Interactuando con pointers (punteros, en español): parte 1
 
 > Se utiliza un pointer para indicar la dirección del primer felt de un elemento en la memoria. El pointer se puede utilizar para acceder al elemento de manera eficiente. Por ejemplo, una función puede aceptar un puntero como argumento y luego acceder al elemento en la dirección del puntero (documentación de Cairo).
 > 
@@ -149,7 +141,7 @@ Supongamos que tenemos una variable de nombre `var`:
 - `&var` es la dirección al objeto `var`.
 - `&[x]` es `x`. Puedes ver que `x` es una dirección?
 
-## **9. Argumentos ímplicitos**
+## 9. Argumentos ímplicitos
 
 Antes de explicar cómo funcionan los argumentos ímplicitos, una regla: Si una función `foo()` llama a una función con un argumento ímplicito, `foo()` también debe obtener y devolver el mismo argumento ímplicito.
 
@@ -195,7 +187,7 @@ Entonces, el argumento ímplicito es ímplicito porque:
 1. Dentro de la función ímplicita, automáticamente se retorna el valor final del argumento ímplicito.
 2. Cuando se llama a la función ímplicita, no necesitamos indicar que vamos a ingresar el argumento ímplicito. Automáticamente se incluye el valor ímplicito.
 
-## **10. Locals (locales, en español)**
+## 10. Locals (locales, en español)
 
 Estamos casi listos para comprender al 100 lo que hicimos en nuestra función que suma dos números. Lo sé, ha sido un camino piedroso 🙉. Pero hay un arcoíris al final del tutorial 🌈.
 
@@ -254,7 +246,38 @@ let (sum) = suma_dos_nums(num1 = NUM1, num2 = NUM2)
 
 ```
 
-## **13. Conclusión**
+## 13. Compila y corre 𓀀
+
+¡Ya sabes hacer funciones en Cairo! Ahora corramos nuestro primer programa.
+
+Las herramientas que ofrece StarkNet para interactuar con la línea de comando son muchas 🙉. No entraremos en detalle hasta más adelante. Por ahora, solo mostraremos los comandos con los que podremos correr la aplicación que creamos en este tutorial 🧘‍♀️. Pero no te preocupes, los comandos para correr otras aplicaciones serán muy similares.
+
+`cairo-compile` nos permite compilar nuestro código y exportar un json que leeremos en el siguiente comando. Si nuestro se llama `src/sum2Numeros.cairo` (porque se encuentra en el directorio `src` como en este repositorio) y queremos que el json se llame `build/suma.json` (porque se encuentra en el directorio `build` como en este repositorio) entonces usaríamos el siguiente código:
+
+```
+cairo-compile src/sum2Numeros.cairo --output build/suma.json`
+```
+
+Sencillo, cierto? ❤️
+
+Ok ahora corramos nuestro programa con `cairo-run`.
+
+```
+cairo-run --program=build/suma.json --print_output --layout=small
+```
+
+El resultado nos debe imprimir correctamente un 11 en nuestra terminal.
+
+Aquí los detalles:
+
+Indicamos en el argumento --program que queremos correr el build/suma.json que generamos antes.
+
+Con --print_output indicamos que queremos imprimir algo de nuestro programa en la terminal. Por ejemplo, en el siguiente tutorial usaremos el builtin (más adelante los estudiaremos) output y la función serialize_word para imprimir en la terminal.
+
+--layout nos permite indicar el layout a utilizar. Según los builtins que utilicemos, será el layout a utilizar. Más adelante estaremos usando el builtin output y para esto necesitamos el layout small. Abajo una foto de los builtins que cubre el layout small. Si no usaremos ningún builtin entonces podemos dejar este argumento vacío por lo que usaríamos el layout default, el plain.
+
+
+## **14. Conclusión**
 
 Felicidades 🚀. Hemos aprendido los básicos de 🏖 Cairo. Con este conocimiento podrías identificar lo que se hace en cada línea de nuestra función que suma dos enteros 🥳.
 
