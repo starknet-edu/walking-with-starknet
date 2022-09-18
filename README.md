@@ -1,6 +1,6 @@
 <p align="center">
     <br>
-    <img src="src/imgs/walking_with_starknet_banner.png" width="400"/>
+    <img src="tutorials/imgs/walking_with_starknet_banner.png" width="400"/>
     <br>
 <p>
 
