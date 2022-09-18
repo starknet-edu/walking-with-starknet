@@ -1,25 +1,31 @@
+<p align="center">
+    <br>
+    <img src="src/imgs/walking_with_starknet_banner.png" width="400"/>
+    <br>
+<p>
+
 # Cairo and StarkNet Tutorials
 
-Learn your way into the scalability of Ethereum; step by step and in community. 
+Learn your way to Ethereum scalability; step by step and in community.
 
 ## Tutorials
 
 |  Language |                                                     Source                                                     | Contributors                                    |
 |:---------:|:--------------------------------------------------------------------------------------------------------------:|-------------------------------------------------|
-|  English  |  [ `tutorials/EN` ](https://github.com/omarespejel/cairo-educational-toolkit/tree/main/tutorials/tutorials/EN) | @[omarespejel](https://github.com/omarespejel)  |
-|  Spanish  | [ `tutorials/ES` ]( https://github.com/omarespejel/cairo-educational-toolkit/tree/main/tutorials/tutorials/ES) | @[omarespejel](https://github.com/omarespejel)  |
-| Potuguese | [ `tutorials/PT` ]( https://github.com/omarespejel/cairo-educational-toolkit/tree/main/tutorials/tutorials/PT) | @[omarespejel](https://github.com/omarespejel)  |
+|  English  |  [ `tutorials/EN` ](https://github.com/starknet-edu/walking-with-starknet/tree/master/tutorials/tutorials/EN) | @[omarespejel](https://github.com/omarespejel)  |
+|  Spanish  | [ `tutorials/ES` ](https://github.com/starknet-edu/walking-with-starknet/tree/master/tutorials/tutorials/ES) | @[omarespejel](https://github.com/omarespejel)  |
+| Potuguese | [ `tutorials/PT` ](https://github.com/starknet-edu/walking-with-starknet/tree/master/tutorials/tutorials/PT) | @[omarespejel](https://github.com/omarespejel)  |
 
-We aim to reach as many Cairo developers as possible. Open a PR if you wish to translate into your own language.
+Our goal is to reach as many developers in Cairo as possible. Open a PR if you want to translate into your own language.
 
 ## Contribute
 
-Your contribution would be highly appreciated. Cairo and StarkNet are evolving frameworks; thus any contribution to keep these tutorials updated and ready would be of high value. 
+Your contribution would be greatly appreciated. Cairo and StarkNet are evolving frameworks; therefore, any contribution to keep these tutorials up to date and ready would be greatly appreciated.
 
-Contribution examples:
-* Translate to your language.
-* Update tutorials to new Cairo and StarkNet versions.
+Examples of contributions:
+* Translate into your language.
+* Update tutorials to new versions of Cairo and StarkNet.
 * Add examples or additional details to the tutorials.
-* Fix errors or typos.
+* Correct errors or typos.
 * Additional tutorials.
 
