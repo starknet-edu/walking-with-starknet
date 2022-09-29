@@ -1,6 +1,6 @@
 # Programando en la L2 de Ethereum (pt. 2): Básicos de Cairo 1
 
-Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [tutorial pasado](tutorial_1.md).
+Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [tutorial pasado](1_instalacion.md).
 
 Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este. 
 

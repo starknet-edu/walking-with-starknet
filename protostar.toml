@@ -1,31 +1,27 @@
 ["protostar.config"]
-protostar_version = "0.3.2"
+protostar_version = "0.4.2"
 
 ["protostar.project"]
 libs_path = "lib"
 
 ["protostar.contracts"]
-suma = [
-    "src/suma.cairo",
+vote = [
+    "src/voting.cairo",
 ]
-multiplicacion = [
-    "src/multiplicacion.cairo",
+ERC721_original = [
+    "src/ERC721MintableBurnable.cairo",
 ]
-division1 = [
-    "src/division1.cairo",
-]
-division2 = [
-    "src/division2.cairo",
-]
-felts1 = [
-    "src/felts1.cairo",
-]
-asserts = [
-    "src/asserts.cairo",
-]
-vector = [
-    "src/vector.cairo",
-]
-matrix = [
-    "src/matrix.cairo",
-]
+
+# https://github.com/Shard-Labs/starknet-devnet
+[profile.devnet.protostar.deploy]
+gateway-url="http://127.0.0.1:5050/"
+chain-id="1"
+
+[profile.testnet.protostar.deploy]
+network="testnet"
+
+[profile.mainnet.protostar.deploy]
+network="alpha-mainnet"
+
+["protostar.shared_command_configs"]
+cairo-path = ["lib/cairo_contracts/src"]
