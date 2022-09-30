@@ -1,7 +1,7 @@
 
 # Programando en la L2 de Ethereum (pt. 1): Intalando Cairo y StarkNet
 
-Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. En el primero preparamos nuestro equipo para programar en Cairo; en el segundo y tercer tutorial revisamos los básicos de la programación en Cairo.
+Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el primer tutorial de una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Aquí preparamos nuestro equipo para programar en Cairo; en el segundo y tercer tutorial revisamos los básicos de la programación en Cairo.
 
 🚀 El futuro de Ethereum es hoy y ya está aquí. Y apenas es el comienzo.
 
