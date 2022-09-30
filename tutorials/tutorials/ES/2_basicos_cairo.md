@@ -2,7 +2,7 @@
 
 Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [tutorial pasado](1_instalacion.md).
 
-Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este. 
+Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el segundo tutorial de una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas el tutorial pasado antes de pasar a este. 
 
 🚀 El futuro de Ethereum es hoy y ya está aquí. Y apenas es el comienzo. Aprende un poco más sobre el ecosistema de Starkware en [este texto corto](https://mirror.xyz/espejel.eth/PlDDEHJpp3Y0UhWVvGAnkk4JsBbJ8jr1oopGZFaRilI).
 
