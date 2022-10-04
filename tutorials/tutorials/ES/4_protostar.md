@@ -101,6 +101,10 @@ Por último, agrega en `protostar.toml` la siguiente sección:
 cairo-path = ["lib/cairo_contracts/src"]
 cairo-path = ["lib/cairopen_contracts/src"]
 ```
+O intentar asi: 
+["protostar.shared_command_configs"]
+cairo-path = ["lib/cairopen_contracts/src", "lib/cairo_contracts/src"]
+
 
 Esto nos permite que Protostar use esos paths para encontrar las librerías de interés. Cuando importes, por ejemplo `from openzeppelin.access.ownable.library import Ownable`, Protostar buscará `Ownable` en el path `lib/cairo_contracts/src/openzeppelin/access/ownable/library`. Si cambias el nombre del directorio donde almacenas tus dependencias externas entonces no usarías `lib` sino el nombre de ese directorio.
 
