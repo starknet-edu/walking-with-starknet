@@ -98,8 +98,7 @@ Por último, agrega en `protostar.toml` la siguiente sección:
 
 ```
 ["protostar.shared_command_configs"]
-cairo-path = ["lib/cairo_contracts/src"]
-cairo-path = ["lib/cairopen_contracts/src"]
+cairo-path = ["lib/cairo_contracts/src", "lib/cairopen_contracts/src"]
 ```
 
 Esto nos permite que Protostar use esos paths para encontrar las librerías de interés. Cuando importes, por ejemplo `from openzeppelin.access.ownable.library import Ownable`, Protostar buscará `Ownable` en el path `lib/cairo_contracts/src/openzeppelin/access/ownable/library`. Si cambias el nombre del directorio donde almacenas tus dependencias externas entonces no usarías `lib` sino el nombre de ese directorio.
@@ -266,15 +265,3 @@ Felicidades 🦾. ¡Acabas de dar tus primeros pasos en StarkNet! Estás aprovec
 En los siguientes tutoriales aprenderemos más sobre la creación de smart contracts en StarkNet 🚀.
 
 Cualquier comentario o mejora por favor comentar con [@espejelomar](https://twitter.com/espejelomar) 🌈.
-
-
-
-
-
-
-starknet deploy --contract ./build/ERC721_original.json --inputs 27424471826656371 4279885 1268012686959018685956609106358567178896598707960497706446056576062850827536 --gateway_url "http://127.0.0.1:5050" --no_wallet
-
-
-protostar deploy ./build/ERC721.json --inputs 27424471826656371 4279885 1268012686959018685956609106358567178896598707960497706446056576062850827536 --network testnet
-
-starknet deploy --contract ./build/ERC721.json --inputs 27424471826656371 4279885 1268012686959018685956609106358567178896598707960497706446056576062850827536 --network alpha-goerli --no_wallet
