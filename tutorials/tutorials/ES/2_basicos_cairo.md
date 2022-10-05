@@ -2,7 +2,7 @@
 
 Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [tutorial pasado](1_instalacion.md).
 
-Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este. 
+Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es). Este es el segundo tutorial de una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas el tutorial pasado antes de pasar a este. 
 
 🚀 El futuro de Ethereum es hoy y ya está aquí. Y apenas es el comienzo. Aprende un poco más sobre el ecosistema de Starkware en [este texto corto](https://mirror.xyz/espejel.eth/PlDDEHJpp3Y0UhWVvGAnkk4JsBbJ8jr1oopGZFaRilI).
 
@@ -12,7 +12,7 @@ Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo 
 
 Para aprender los básicos de Cairo crearemos juntos una función para sumar dos números 🎓. El código es muy sencillo pero nos ayudará a entender mejor muchos conceptos de Cairo. Nos basaremos fuertemente en la [documentación de Cairo](https://www.cairo-lang.org/docs/). La documentación es excelente al día de hoy no está lista para fungir como un tutorial estructurado para principiantes. Aquí buscamos solucionar esto 🦙.
 
-Aquí está nuestra código para sumar dos números. Puedes pegarlo directamente en tu editor de código o IDE. En mi caso estoy usando VSCode con la extensión de Cairo.
+Aquí está nuestro código para sumar dos números. Puedes pegarlo directamente en tu editor de código o IDE. En mi caso estoy usando VSCode con la extensión de Cairo.
 
 No te preocupes si no entiendes en este punto todo lo que está sucediendo. Pero [@espejelomar](https://twitter.com/espejelomar) se preocupará si al final del tutorial no comprendes cada línea de este código. Avísame si es así porque mejoraremos 🧐. Cairo es un lenguaje low-level por lo que será más díficil que aprender Python, por ejemplo. Pero valdrá la pena 🥅. Ojos en la meta.
 
@@ -252,7 +252,7 @@ let (sum) = suma_dos_nums(num1 = NUM1, num2 = NUM2)
 
 Las herramientas que ofrece StarkNet para interactuar con la línea de comando son muchas 🙉. No entraremos en detalle hasta más adelante. Por ahora, solo mostraremos los comandos con los que podremos correr la aplicación que creamos en este tutorial 🧘‍♀️. Pero no te preocupes, los comandos para correr otras aplicaciones serán muy similares.
 
-`cairo-compile` nos permite compilar nuestro código y exportar un json que leeremos en el siguiente comando. Si nuestro se llama `src/suma.cairo` (porque se encuentra en el directorio `src` como en este repositorio) y queremos que el json se llame `build/suma.json` (porque se encuentra en el directorio `build` como en este repositorio) entonces usaríamos el siguiente código:
+`cairo-compile` nos permite compilar nuestro código y exportar un json que leeremos en el siguiente comando. Si el nuestro se llama `src/suma.cairo` (porque se encuentra en el directorio `src` como en este repositorio) y queremos que el json se llame `build/suma.json` (porque se encuentra en el directorio `build` como en este repositorio) entonces usaríamos el siguiente código:
 
 ```
 cairo-compile src/suma.cairo --output build/suma.json`
