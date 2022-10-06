@@ -1,0 +1,180 @@
+[
+    {
+        "members": [
+            {
+                "name": "votes_yes",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "votes_no",
+                "offset": 1,
+                "type": "felt"
+            }
+        ],
+        "name": "VoteCounting",
+        "size": 2,
+        "type": "struct"
+    },
+    {
+        "members": [
+            {
+                "name": "allowed",
+                "offset": 0,
+                "type": "felt"
+            }
+        ],
+        "name": "VoterInfo",
+        "size": 1,
+        "type": "struct"
+    },
+    {
+        "data": [
+            {
+                "name": "previousOwner",
+                "type": "felt"
+            },
+            {
+                "name": "newOwner",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "account",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "Paused",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "account",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "Unpaused",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "name": "admin_address",
+                "type": "felt"
+            },
+            {
+                "name": "registered_addresses_len",
+                "type": "felt"
+            },
+            {
+                "name": "registered_addresses",
+                "type": "felt*"
+            }
+        ],
+        "name": "constructor",
+        "outputs": [],
+        "type": "constructor"
+    },
+    {
+        "inputs": [],
+        "name": "admin",
+        "outputs": [
+            {
+                "name": "owner",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "paused",
+        "outputs": [
+            {
+                "name": "paused",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "get_voting_status",
+        "outputs": [
+            {
+                "name": "status",
+                "type": "VoteCounting"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "user_address",
+                "type": "felt"
+            }
+        ],
+        "name": "get_voter_status",
+        "outputs": [
+            {
+                "name": "status",
+                "type": "VoterInfo"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "is_voter_registered",
+        "outputs": [
+            {
+                "name": "is_voter_registered",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "vote",
+                "type": "felt"
+            }
+        ],
+        "name": "vote",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "pause",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "unpause",
+        "outputs": [],
+        "type": "function"
+    }
+]
