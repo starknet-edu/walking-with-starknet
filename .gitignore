@@ -134,3 +134,7 @@ dmypy.json
 # vscode project settings
 .vscode/
 .gitsigners
+
+# code not ready ey
+tutorials/tutorials/ES/6_openzeppelin.md
+tutorials/tutorials/ES/5_votacion_on_chain.md
