@@ -11,13 +11,11 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -138,3 +136,5 @@ dmypy.json
 # code not ready ey
 tutorials/tutorials/ES/6_openzeppelin.md
 tutorials/tutorials/ES/5_votacion_on_chain.md
+tutorials/tutorials/ES/7_randomness.md
+src/random.cairo
