@@ -210,7 +210,7 @@ func vote{
 
     // Mark that the voter has already voted and update in the storage
     let info_actualizada = VoterInfo(
-        allowed=1,
+        allowed=0,
     );
     voter_info.write(caller, info_actualizada);
 
