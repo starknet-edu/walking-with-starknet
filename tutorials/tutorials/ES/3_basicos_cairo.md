@@ -12,23 +12,22 @@ En la tercera parte de la serie de tutoriales básicos de Cairo profundizaremos 
 
 ## 1. Los builtin y su relación con los pointers
 
-En el siguiente programa estamos multiplicando dos números. El código entero está disponible en [src/multiplicacion.cairo](../../../src/multiplicacion.cairo). Ahí encontrarás el código correctamente comentado.
+En el siguiente programa estamos multiplicando dos números. El código entero está disponible en [src/multiplicacion.cairo](../../../src/multiplication.cairo). Ahí encontrarás el código correctamente comentado.
 
 ```rust
 %builtins output
 
 from starkware.cairo.common.serialize import serialize_word
 
-func mult_dos_nums(num1, num2) -> (prod : felt){
+func mult_two_nums(num1, num2) -> (prod : felt){
     return(prod = num1 * num2);
 }
 
 func main{output_ptr: felt*}(){
-    let (prod) = mult_dos_nums(2,2);
+    let (prod) = mult_two_nums(2,2);
     serialize_word(prod);
     return ();
 }
-
 ```
 
 ¿Recuerdas que introdujimos los `builtins` en la sesión pasada junto con los argumentos implícitos?
@@ -134,10 +133,10 @@ En la librería `starkware.cairo.common.math` encontramos funciones que nos se
 from starkware.cairo.common.math import assert_not_zero, assert_not_equal, assert_nn, assert_le
 
 func main{range_check_ptr : felt}(){
-    assert_not_zero(1);  // no es cero
-    assert_not_equal(1, 2);  // no son iguales
-    assert_nn(1); // no es negativo (non-negative)
-    assert_le(1, 10);  // menor o igual
+    assert_not_zero(1);  // not zero
+    assert_not_equal(1, 2);  // not equal
+    assert_nn(1); // non-negative
+    assert_le(1, 10);  // less or equal
     
     return ();
 }
@@ -156,7 +155,7 @@ En efecto la siguiente la función que compara `10/3 < 10` nos retornará un e
 from starkware.cairo.common.math import assert_lt
 
 func main{range_check_ptr : felt}(){
-    assert_lt(10/3, 10); // menor que
+    assert_lt(10/3, 10); // less than
 
     return ();
 }
@@ -241,34 +240,34 @@ struct Matrix{
 
 func main{output_ptr: felt*}(){
 
-    // Definiendo un array, mi_array, de felts.
-    let (mi_array : felt*) = alloc();
+    // Defining an array, my_array, of felts.
+    let (my_array : felt*) = alloc();
 
-    // Asignando valores a tres elementos de mi_array.  
-    assert mi_array[0] = 1;
-    assert mi_array[1] = 2;
-    assert mi_array[2] = 3;
+    // Assigning values ​​to three elements of my_array.  
+    assert my_array[0] = 1;
+    assert my_array[1] = 2;
+    assert my_array[2] = 3;
 
-    // Creando los vectores Vector, por 
-    // simplicidad usamos el mismo  mi_array para ambos.
-    let v1 = Vector(elements = mi_array);
-    let v2 = Vector(elements = mi_array);
+    // Creating the vectors Vector, by
+    // simplicity we use the same my_array for both.
+    let v1 = Vector(elements = my_array);
+    let v2 = Vector(elements = my_array);
 
-    // Definiendo un array de matrices Matrix
+    // Defining an array of Matrix matrices
     let (matrix_array : Matrix*) = alloc();
 
-    // Llenando matrix_array con instancias de Matrix.
-    // Cada instancia de Matrix contiene como members
-    // a instancias de Vector.
+    // Filling matrix_array with Matrix instances.
+    // Each instance of Matrix contains as members
+    // Vector instances.
     assert matrix_array[0] = Matrix(x = v1, y = v2);
     assert matrix_array[1] = Matrix(x = v1, y = v2);
 
-    // Usamos assert para probar algunos valores en
-    // nuestra matrix_array.
+    // We use assert to test some values ​​in
+    // our matrix_array.
     assert matrix_array[0].x.elements[0] = 1;
     assert matrix_array[1].x.elements[1] = 2;
 
-    // ¿Qué valor crees que imprimirá? Respuesta: 3
+    // What value do you think it will print? Answer: 3
     serialize_word(matrix_array[1].x.elements[2]);
 
     return();
@@ -276,21 +275,21 @@ func main{output_ptr: felt*}(){
 
 ```
 
-Creamos un array de felts llamado `mi_array`. Esta es la forma en que se define:
+Creamos un array de felts llamado `my_array`. Esta es la forma en que se define:
 
 ```
-let (mi_array : felt*) = alloc();
+let (my_array : felt*) = alloc();
 
 ```
 
-Es poco intuitivo en comparación con lo fácil que es en Python y otros lenguajes. `mi_array : felt*` define una variable llamada `mi_array` que contendrá un pointer (ver [tutorial pasado](https://mirror.xyz/dashboard/edit/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w)) a un felt (aún no definimos a qué felt). ¿Por qué? La documentación de Cairo nos ayuda:
+Es poco intuitivo en comparación con lo fácil que es en Python y otros lenguajes. `my_array : felt*` define una variable llamada `my_array` que contendrá un pointer (ver [tutorial pasado](https://mirror.xyz/dashboard/edit/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w)) a un felt (aún no definimos a qué felt). ¿Por qué? La documentación de Cairo nos ayuda:
 
 > “Los arrays se pueden definir como un pointer (felt*) al primer elemento del array. A medida que se llena el array, los elementos ocupan celdas de memoria contiguas. La función alloc() se usa para definir un segmento de memoria que expande su tamaño cada vez que se escribe un nuevo elemento en el array (documentación de Cairo)”.
 > 
 
-Entonces, en el caso de `mi_array`, al colocar el `alloc()` estamos indicando que el segmento de memoria al que la expresión `mi_array` apunta (recuerda que `mi_array` es solo el nombre de un pointer, `felt*`, en memoria) será expandido cada vez que se escriba un nuevo elemento en `mi_array`.
+Entonces, en el caso de `my_array`, al colocar el `alloc()` estamos indicando que el segmento de memoria al que la expresión `my_array` apunta (recuerda que `my_array` es solo el nombre de un pointer, `felt*`, en memoria) será expandido cada vez que se escriba un nuevo elemento en `my_array`.
 
-De hecho, si pasamos [al repo](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/alloc.cairo) donde se encuentra `alloc()` veremos que retorna `(ptr : felt*)`. Es decir, nos regresa una tupla de un solo miembro que es un `felt*` (un pointer a un `felt`). Por ser una tupla la recibimos con un `let` y con `mi_array : felt*` entre paréntesis (ver [básicos de Cairo pt. 2](https://mirror.xyz/defilatam.eth/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w)). Todo va haciendo sentido, ¿cierto 🙏?
+De hecho, si pasamos [al repo](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/alloc.cairo) donde se encuentra `alloc()` veremos que retorna `(ptr : felt*)`. Es decir, nos regresa una tupla de un solo miembro que es un `felt*` (un pointer a un `felt`). Por ser una tupla la recibimos con un `let` y con `my_array : felt*` entre paréntesis (ver [básicos de Cairo pt. 2](https://mirror.xyz/defilatam.eth/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w)). Todo va haciendo sentido, ¿cierto 🙏?
 
 Vemos que la definición de nuestro array de matrices es exactamente igual salvo que en vez de querer un array de `felt` queremos uno de `Matrix`:
 
@@ -306,14 +305,14 @@ assert matrix_array[0] = Matrix(x = v1, y = v2);
 
 ```
 
-Lo que hicimos fue crear una `Matrix(x = v1, y = v2)` y asignarla a la posición 0 de nuestra `matrix_array`. Recuerda que empezamos a contar desde 0. Rellenar nuestro array de `felt` es aún más trivial: `assert mi_array[0] = 1`.
+Lo que hicimos fue crear una `Matrix(x = v1, y = v2)` y asignarla a la posición 0 de nuestra `matrix_array`. Recuerda que empezamos a contar desde 0. Rellenar nuestro array de `felt` es aún más trivial: `assert my_array[0] = 1`.
 
 Después simplemente llamamos de diferentes maneras a elementos dentro de `matrix_array`. Por ejemplo, con `matrix_array[1].x.elements[2]` indicamos estos pasos:
 
 1. Llama al segundo, `[1]`, elemento de `matrix_array`. Es decir, a `Matrix(x = v1, y = v2)`.
-2. Llama al `member` `x` de `Matrix`. Es decir, a `v1 = Vector(elements = mi_array)`.
-3. Llama al `member` `elements` de `v1`. Es decir, a `mi_array`.
-4. Llama al tercer, `[2]`, elemento de `mi_array`. Es decir, a `3`.
+2. Llama al `member` `x` de `Matrix`. Es decir, a `v1 = Vector(elements = my_array)`.
+3. Llama al `member` `elements` de `v1`. Es decir, a `my_array`.
+4. Llama al tercer, `[2]`, elemento de `my_array`. Es decir, a `3`.
 
 No es tan complicado pero es lo suficientemente satisfactorio 🤭.
 

@@ -14,34 +14,34 @@ struct Matrix{
 
 func main{output_ptr: felt*}(){
 
-    // Definiendo un array, mi_array, de felts.
-    let (mi_array : felt*) = alloc();
+    // Defining an array, my_array, of felts.
+    let (my_array : felt*) = alloc();
 
-    // Asignando valores a tres elementos de mi_array.  
-    assert mi_array[0] = 1;
-    assert mi_array[1] = 2;
-    assert mi_array[2] = 3;
+    // Assigning values ​​to three elements of my_array.  
+    assert my_array[0] = 1;
+    assert my_array[1] = 2;
+    assert my_array[2] = 3;
 
-    // Creando los vectores Vector, por 
-    // simplicidad usamos el mismo  mi_array para ambos.
-    let v1 = Vector(elements = mi_array);
-    let v2 = Vector(elements = mi_array);
+    // Creating the vectors Vector, by
+    // simplicity we use the same my_array for both.
+    let v1 = Vector(elements = my_array);
+    let v2 = Vector(elements = my_array);
 
-    // Definiendo un array de matrices Matrix
+    // Defining an array of Matrix matrices
     let (matrix_array : Matrix*) = alloc();
 
-    // Llenando matrix_array con instancias de Matrix.
-    // Cada instancia de Matrix contiene como members
-    // a instancias de Vector.
+    // Filling matrix_array with Matrix instances.
+    // Each instance of Matrix contains as members
+    // Vector instances.
     assert matrix_array[0] = Matrix(x = v1, y = v2);
     assert matrix_array[1] = Matrix(x = v1, y = v2);
 
-    // Usamos assert para probar algunos valores en
-    // nuestra matrix_array.
+    // We use assert to test some values ​​in
+    // our matrix_array.
     assert matrix_array[0].x.elements[0] = 1;
     assert matrix_array[1].x.elements[1] = 2;
 
-    // ¿Qué valor crees que imprimirá? Respuesta: 3
+    // What value do you think it will print? Answer: 3
     serialize_word(matrix_array[1].x.elements[2]);
 
     return();

@@ -11,9 +11,9 @@ vote = [
 ERC721_original = [
     "src/ERC721MintableBurnable.cairo",
 ]
-randomERC721 = [
-    "src/randomERC721.cairo",
-]
+# randomERC721 = [
+#     "src/randomERC721.cairo",
+# ]
 
 # https://github.com/Shard-Labs/starknet-devnet
 [profile.devnet.protostar.deploy]

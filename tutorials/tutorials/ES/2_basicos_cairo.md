@@ -8,7 +8,7 @@ Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo 
 
 ---
 
-## 1. Sumar dos números
+## 1. sumr dos números
 
 Para aprender los básicos de Cairo crearemos juntos una función para sumar dos números 🎓. El código es muy sencillo pero nos ayudará a entender mejor muchos conceptos de Cairo. Nos basaremos fuertemente en la [documentación de Cairo](https://www.cairo-lang.org/docs/). La documentación es excelente, al día de hoy no está lista para fungir como un tutorial estructurado para principiantes. Aquí buscamos solucionar esto 🦙.
 
@@ -16,13 +16,21 @@ Aquí está nuestro código para sumar dos números. Puedes pegarlo directamente
 
 No te preocupes si no entiendes en este punto todo lo que está sucediendo. Pero [@espejelomar](https://twitter.com/espejelomar) se preocupará si al final del tutorial no comprendes cada línea de este código. Avísame si es así porque mejoraremos 🧐. Cairo es un lenguaje low-level por lo que será más díficil que aprender Python, por ejemplo. Pero valdrá la pena 🥅. Ojos en la meta.
 
-Veamos línea por línea y con ejemplos adicionales lo que estamos haciendo. El programa entero para sumar los dos números está disponible en [src/suma.cairo](../../../src/suma.cairo). Ahí encontrarás el código correctamente comentado.
+Veamos línea por línea y con ejemplos adicionales lo que estamos haciendo. El programa entero para sumar los dos números está disponible en [src/sum.cairo](../../../src/suma.cairo). Ahí encontrarás el código correctamente comentado.
 
 ```python
-func suma_dos_nums(num1: felt, num2: felt) -> (suma: felt) {
+%builtins output
+
+from starkware.cairo.common.serialize import serialize_word
+
+// @dev Add two numbers and return the result
+// @param num1 (felt): first number to add
+// @param num2 (felt): second number to add
+// @return sum (felt): value of the sum of the two numbers
+func sum_two_nums(num1: felt, num2: felt) -> (sum: felt) {
     alloc_locals;
-    local sumando = num1+num2;
-    return (suma=sumando);
+    local sum = num1+num2;
+    return (sum=sum);
 }
 
 func main{output_ptr: felt*}(){
@@ -31,8 +39,8 @@ func main{output_ptr: felt*}(){
     const NUM1 = 1;
     const NUM2 = 10;
 
-    let (suma) = suma_dos_nums(num1 = NUM1, num2 = NUM2);
-    serialize_word(suma);
+    let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2);
+    serialize_word(sum);
     return ();
 }
 
@@ -70,18 +78,18 @@ Además de los `felt`, tenemos otras estructuras a nuestra disposición (más d
 Podemos crear nuestra propia estructura, estilo diccionario de Python:
 
 ```python
-struct MiStruct{
-    primer_miembro : felt,
-    segundo_miembro : felt,
+struct MyStruct{
+    first_member : felt,
+    second_member : felt,
 }
 
 ```
 
-Así definimos un nuevo tipo de datos llamado `MiStruct` con las propiedades `primer_miembro` y `segundo_miembro`. Definimos que el `type` de ambas propiedades sea `felt` pero bien pudimos colocar otros types. Cuando creamos una `struct` es obligatorio agregar el `type`.
+Así definimos un nuevo tipo de datos llamado `MyStruct` con las propiedades `first_member` y `second_member`. Definimos que el `type` de ambas propiedades sea `felt` pero bien pudimos colocar otros types. Cuando creamos una `struct` es obligatorio agregar el `type`.
 
-Podemos crear una variable de tipo `MiStruct`: `Nombre = (primer_miembro=1, segundo_miembro=4)`. Ahora la variable `Nombre` tiene `type` `MiStruct`.
+Podemos crear una variable de tipo `MyStruct`: `name = (first_member=1, second_member=4)`. Ahora la variable `name` tiene `type` `MyStruct`.
 
-Con `Nombre.primer_miembro` podemos acceder al valor de este argumento, en este caso es 1.
+Con `name.first_member` podemos acceder al valor de este argumento, en este caso es 1.
 
 ## **6. Las tuplas (tuples, en inglés)**
 
@@ -93,14 +101,14 @@ Las tuplas en Cairo son prácticamente iguales a las tuplas en Python:
 La documentación de Cairo es muy clara en su definición de las tuplas. Aquí su ejemplo:
 
 ```python
-# Una tupla con tres elementos
+# A tuple with three elements
 local tuple0 : (felt, felt, felt) = (7, 9, 13)
 local tuple1 : (felt) = (5,)  # (5) is not a valid tuple.
 
-# Una tupla con nombre no requiere una coma final
+# A named tuple does not require a trailing comma
 local tuple2 : (a : felt) = (a=5)
 
-# Tupla que contiene otra tupla.
+# Tuple containing another tuple.
 local tuple3 : (felt, (felt, felt, felt), felt) = (1, tuple0, 5)
 local tuple4 : ((felt, (felt, felt, felt), felt), felt, felt) = (
     tuple3, 2, 11)
@@ -114,17 +122,17 @@ let b = tuple4[0][1][2]  # let b = 13.
 La definición de una función en Cairo tiene el siguiente formato:
 
 ```python
-func función(arg1: felt, arg2) -> (retornado: felt){
+func function(arg1: felt, arg2) -> (retornado: felt){
   // Cuerpo de la función
-  let (suma) = suma_dos_nums(num1 = NUM1, num2 = NUM2);
-  return(retornado=suma);
+  let (sum) = sum_two_numvers(num1 = NUM1, num2 = NUM2);
+  return(returned=sum);
 }
 
 ```
 
 - **Definir el scope de la función** (alcance, en español). Comenzamos la función con `func`. El scope de nuestra función se define con llaves {}.
-- **Argumentos y nombre**. Definimos los argumentos que recibe la función entre paréntesis a un lado del nombre que definimos para nuestra función, `función` en este caso. Los argumentos pueden llevar su type (tipo, en español) definido o no. En este caso `arg1` debe ser de type `felt` y `arg2` puede ser de cualquier type.
-- **Retornar**. Necesariamente tenemos que agregar `return()`. Aunque la función no esté regresando algo. En este caso estamos retornando una variable llamada `retornado` por lo que colocamos `return(retornado=suma)` donde suma es el valor que tomará la variable `retornado`.
+- **Argumentos y nombre**. Definimos los argumentos que recibe la función entre paréntesis a un lado del nombre que definimos para nuestra función, `function` en este caso. Los argumentos pueden llevar su type (tipo, en español) definido o no. En este caso `arg1` debe ser de type `felt` y `arg2` puede ser de cualquier type.
+- **Retornar**. Necesariamente tenemos que agregar `return()`. Aunque la función no esté regresando algo. En este caso estamos retornando una variable llamada `returned` por lo que colocamos `return(returned=sum)` donde suma es el valor que tomará la variable `returned`.
 - **Comentarios**. En Cairo comentamos con `//`. Este código no será interpretado al correr nuestro programa.
 
 Como con otros lenguajes de programación. Necesitaremos una función `main()` que orqueste el uso de nuestro programa en Cairo. Se define exactamente igual a una función normal solo que con el nombre `main()`. Puede ir antes o después de las demás funciones que creamos en nuestro programa.
@@ -153,8 +161,8 @@ Dicho esto, veamos cómo se ve una función con un argumento ímplicito. La func
 func serialize_word{output_ptr : felt*}(word : felt):
     assert [output_ptr] = word
     let output_ptr = output_ptr + 1
-    # El nuevo valor de output_ptr es implícitamente
-    # añadido en return.
+    # The new value of output_ptr is implicitly
+    # added in return.
     return ()
 end
 
@@ -225,7 +233,7 @@ const NUM1 = 1
 Este es el formato para definir una:
 
 ```python
-let ref_nombre : ref_type = ref_expr
+let ref_name : ref_type = ref_expr
 
 ```
 
@@ -234,15 +242,15 @@ Donde `ref_type` es un type y `ref_expr` es una expresión de Cairo. Colocar
 Una referencia se puede reasignar ([documentación](https://www.cairo-lang.org/docs/reference/syntax.html#references) de Cairo):
 
 ```python
-let a = 7  # a está inicialmente ligada a la expresión 7.
-let a = 8  # a ahora está ligada a la expresión 8.
+let a = 7 # a is initially bound to the expression 7.
+let a = 8 # a is now bound to the expression 8.
 
 ```
 
-En nuestra suma de dos números creamos una referencia llamada `sum`. Vemos que asignamos a `sum` el `felt` que nos retorna la funcion `suma_dos_nums`.
+En nuestra suma de dos números creamos una referencia llamada `sum`. Vemos que asignamos a `sum` el `felt` que nos retorna la funcion `sum_two_nums`.
 
 ```python
-let (sum) = suma_dos_nums(num1 = NUM1, num2 = NUM2)
+let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2)
 
 ```
 
@@ -252,10 +260,10 @@ let (sum) = suma_dos_nums(num1 = NUM1, num2 = NUM2)
 
 Las herramientas que ofrece StarkNet para interactuar con la línea de comando son muchas 🙉. No entraremos en detalle hasta más adelante. Por ahora, solo mostraremos los comandos con los que podremos correr la aplicación que creamos en este tutorial 🧘‍♀️. Pero no te preocupes, los comandos para correr otras aplicaciones serán muy similares.
 
-`cairo-compile` nos permite compilar nuestro código y exportar un json que leeremos en el siguiente comando. Si el nuestro se llama `src/suma.cairo` (porque se encuentra en el directorio `src` como en este repositorio) y queremos que el json se llame `build/suma.json` (porque se encuentra en el directorio `build` como en este repositorio) entonces usaríamos el siguiente código:
+`cairo-compile` nos permite compilar nuestro código y exportar un json que leeremos en el siguiente comando. Si el nuestro se llama `src/sum.cairo` (porque se encuentra en el directorio `src` como en este repositorio) y queremos que el json se llame `build/sum.json` (porque se encuentra en el directorio `build` como en este repositorio) entonces usaríamos el siguiente código:
 
 ```
-cairo-compile src/suma.cairo --output build/suma.json`
+cairo-compile src/sum.cairo --output build/sum.json`
 ```
 
 Sencillo, cierto? ❤️
@@ -263,14 +271,14 @@ Sencillo, cierto? ❤️
 Ok ahora corramos nuestro programa con `cairo-run`.
 
 ```
-cairo-run --program=build/suma.json --print_output --layout=small
+cairo-run --program=build/sum.json --print_output --layout=small
 ```
 
 El resultado nos debe imprimir correctamente un 11 en nuestra terminal.
 
 Aquí los detalles:
 
-Indicamos en el argumento --program que queremos correr el build/suma.json que generamos antes.
+Indicamos en el argumento --program que queremos correr el build/sum.json que generamos antes.
 
 Con --print_output indicamos que queremos imprimir algo de nuestro programa en la terminal. Por ejemplo, en el siguiente tutorial usaremos el builtin (más adelante los estudiaremos) output y la función serialize_word para imprimir en la terminal.
 
@@ -279,7 +287,7 @@ Con --print_output indicamos que queremos imprimir algo de nuestro programa en l
 
 ## **14. Conclusión**
 
-Felicidades 🚀. Hemos aprendido los básicos de 🏖 Cairo. Con este conocimiento podrías identificar lo que se hace en cada línea de nuestra función que suma dos enteros 🥳.
+Felicidades 🚀. Hemos aprendido los básicos de 🏖 Cairo. Con este conocimiento podrías identificar lo que se hace en cada línea de nuestra función que sum dos enteros 🥳.
 
 En los siguientes tutoriales aprenderemos más sobre los pointers y el manejo de la memoria; la common library de cairo; cómo funciona el compilador de Cairo; y más!
 

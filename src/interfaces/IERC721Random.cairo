@@ -1,102 +1,27 @@
 %lang starknet
 
+from starkware.cairo.common.uint256 import Uint256
 
-from starkware.cairo.common.uint256 import Uint256, uint256_add
-from starkware.starknet.common.syscalls import get_caller_address
-from starkware.cairo.common.cairo_builtins import HashBuiltin
-from starkware.cairo.common.math import unsigned_div_rem, split_felt
-from starkware.cairo.common.cairo_secp.bigint import BigInt3
-from starkware.cairo.common.alloc import alloc
-
-
-from openzeppelin.access.ownable.library import Ownable
-from openzeppelin.introspection.erc165.library import ERC165
-from openzeppelin.token.erc721.library import ERC721
-
-from src.interfaces.IRNGOracle import IRNGOracle
-from src.utils.array import concat_arr
-from src.utils.metadata_utils import set_base_tokenURI, ERC721_Metadata_tokenURI
-
-// ------
-// Constants
-// ------
-
-// const PASSWORD = 654;
-
-// ------
-// Storage
-// ------
-
-@storage_var
-func oracle_address() -> (addr: felt) {
+@contract_interface
+namespace IExerciseSolution {
+    // Breeding function
+    func owner() -> (owner: felt) {
+    }
+    func get_last_tokenID() -> (tokenID: Uint256) {
+    }
+    func register_me_as_breeder() -> (is_added: felt) {
+    }
+    func declare_animal(sex: felt, legs: felt, wings: felt) -> (token_id: Uint256) {
+    }
+    func get_animal_characteristics(token_id: Uint256) -> (sex: felt, legs: felt, wings: felt) {
+    }
+    func token_of_owner_by_index(account: felt, index: felt) -> (token_id: Uint256) {
+    }
+    func declare_dead_animal(token_id: Uint256) {
+    }
 }
 
-@storage_var
-func beacon_address() -> (address: felt) {
-}
 
-@storage_var
-func rn_request_id() -> (id: felt) {
-}
-
-@storage_var
-func request_id_to_tokenId(rn_request_id: felt) -> (tokenId: Uint256) {
-}
-
-@storage_var
-func request_id_to_sender(rn_request_id: felt) -> (address: felt) {
-}
-
-@storage_var
-func request_id_to_tokenURI(rn_request_id: felt) -> (tokenURI: felt) {
-}
-
-@storage_var
-func token_counter() -> (number: Uint256) {
-}
-
-@storage_var
-func tokenID_to_random_number(tokenID: Uint256) -> (number: felt) {
-}
-
-// ------
-// Constructor
-// ------
-
-@constructor
-func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
-    oracle_addr: felt, _beacon_address: felt
-) {
-    alloc_locals;
-    // "L2 coleccion octubre"
-    let name = 435001157271749608490168255869766614643032355429;
-    // "BBB"
-    let symbol = 4342338;
-    let owner = 1268012686959018685956609106358567178896598707960497706446056576062850827536;
-
-    let base_token_uri_len = 3;
-    let (base_token_uri: felt*) = alloc();
-    // "https://gateway.pinata.cloud/ip"
-    assert base_token_uri[0] = 184555836509371486644298270517380613565396767415278678887948391494588524912;
-    // "fs/QmZLkgkToULVeKdbMic3XsepXj2X"
-    assert base_token_uri[1] = 181013377130050200990509839903581994934108262384437805722120074606286615128;
-    // "xxMukhUAUEYzBEBDMV/"
-    assert base_token_uri[2] = 2686569255955106314754156739605748156359071279;
-
-    // .jpeg
-    let token_uri_suffix = 1199354246503;
-
-    token_counter.write(Uint256(0,0));
-    ERC721.initializer(name, symbol);
-    Ownable.initializer(owner);
-    // set_base_tokenURI(base_token_uri_len, base_token_uri, token_uri_suffix);
-
-    // Requirements for randomness
-    oracle_address.write(oracle_addr);
-    beacon_address.write(_beacon_address);
-
-    return ();
-}
 
 // ------
 // Getters
@@ -135,26 +60,45 @@ func tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     return (token_uri_len=token_uri_len, token_uri=token_uri);
 }
 
-@view
-func get_current_random_requestID{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (request_id: felt) {
-    let request_id : felt = rn_request_id.read();
-    return (request_id=request_id);
-}
-
-@view
-func get_sender_random_requestID{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (caller: felt) {
-    let request_id : felt = rn_request_id.read();
-    let caller : felt = request_id_to_sender.read(request_id);
-    return (caller=caller);
-}
-
-
-
-
 // ------
 // Constant Functions: non state-changing functions
 // ------
 
+func ERC721_Metadata_tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_id: Uint256, random_number: felt
+) -> (token_uri_len: felt, token_uri: felt*) {
+    alloc_locals;
+
+    let exists = ERC721._exists(token_id);
+    assert exists = 1;
+
+    // TODO XXX Might be missing to read the storage with the base_token_uri
+    let (local base_token_uri) = alloc();
+    let (local base_token_uri_len) = erc721_baseURI_len.read();
+
+    // Save in storage the URI base
+    _store_base_tokenURI(base_token_uri_len, base_token_uri);
+
+    // let (token_id_ss_len, token_id_ss) = uint256_to_ss(token_id);
+
+    // Concatenate in an array the URI's base len, and base, the token_id's len and body 
+    let (local number) = alloc();
+    [number] = random_number;
+
+    let (token_uri_temp, token_uri_len_temp) = concat_arr(
+                                base_token_uri_len, base_token_uri, 1, number
+                                );
+
+    // Store in suffix the array containing the suffix
+    let (ERC721_base_token_uri_suffix_local) = erc721_base_tokenURI_suffix.read();
+    let (local suffix) = alloc();
+    [suffix] = ERC721_base_token_uri_suffix_local;
+
+    // Concatenate the previous array now with the suffix
+    let (token_uri, token_uri_len) = concat_arr(token_uri_len_temp, token_uri_temp, 1, suffix);
+
+    return (token_uri_len=token_uri_len, token_uri=token_uri);
+}
 
 
 // set the random value corresponding to the NFT as URI
@@ -170,13 +114,43 @@ func get_sender_random_requestID{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*,
 func create_random_number{syscall_ptr: felt*, range_check_ptr}(rng: felt) -> (roll: felt) {
     // Take the lower 128 bits of the random string
     let (_, low) = split_felt(rng);
-    let (_, number) = unsigned_div_rem(low, 10);
+    let (_, number) = unsigned_div_rem(low, 3);
     return (number + 1,);
 }
 
 // ------
 // Non-Constant Functions: state-changing functions
 // ------
+
+
+// Save in storage all the base and suffix of the token URI
+func set_base_tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_uri_len: felt, token_uri: felt*, token_uri_suffix: felt
+    ) {
+    
+    // store the baseURI string into the erc721_baseURI storage variable 
+    _store_base_tokenURI(token_uri_len, token_uri);
+
+    // store the baseURI string length the erc721_baseURI_len storage variable 
+    erc721_baseURI_len.write(token_uri_len);
+
+    // store the tokenURI suffix (e.g. json) in the erc721_base_tokenURI_suffix storage variable
+    erc721_base_tokenURI_suffix.write(token_uri_suffix);
+    return ();
+}
+
+// Store the value of an array into an storage variable
+func _store_base_tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_uri_len: felt, token_uri: felt*
+    ) {
+    if (token_uri_len == 0) {
+        return ();
+    }
+    // At position "token_uri_len" of the array "token_uri" store [token_uri]
+    erc721_baseURI.write(token_uri_len, [token_uri]);
+    _store_base_tokenURI(token_uri_len=token_uri_len - 1, token_uri=token_uri + 1);
+    return ();
+}
 
 @external
 func create_collectible{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
@@ -223,7 +197,7 @@ func will_recieve_rng{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_chec
     let (nft_owner: felt) = request_id_to_sender.read(request_id);
     // let (tokenURI: felt) = request_id_to_tokenURI.read(request_id);
     // xxx replace, this is while we set URI
-    // let tokenURI: felt = 2;
+    let tokenURI: felt = 2;
 
     // Update new tokenID
     let last_token : Uint256 = token_counter.read();
@@ -233,7 +207,7 @@ func will_recieve_rng{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_chec
 
     // Mint to nft owner and set the URI of the tokenID
     ERC721._mint(to=nft_owner, token_id=new_tokenID);
-    // ERC721._set_token_uri(token_id=new_tokenID, token_uri=tokenURI);
+    ERC721._set_token_uri(token_id=new_tokenID, token_uri=tokenURI);
 
     // Set random number corresponding to the tokenID
     let (random_number) = create_random_number(rng.d0);
