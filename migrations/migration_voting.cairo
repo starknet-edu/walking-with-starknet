@@ -13,9 +13,14 @@ const VOTING_ADDRESS_2 = 0x02cdAb749380950e7a7c0deFf5ea8eDD716fEb3a2952aDd4E5659
 
 // Deploy the following migration in the CLI with:
 // protostar migrate migrations/migration_voting.cairo --network testnet --private-key-path pkey --account-address 0x02c7e70bbd22095ad396f13e265ef18fc78257957e3f4e7b897cd9b9e8da3e77
-
+// protostar migrate migrations/migration_voting.cairo --gateway-url "http://127.0.0.1:5050/" --chain-id "1" --private-key-path pkey --account-address 0x02c7e70bbd22095ad396f13e265ef18fc78257957e3f4e7b897cd9b9e8da3e77
 @external
 func up() {
+
+    tempvar first_voter_status : felt;
+    tempvar votes_yes : felt;
+    tempvar votes_no : felt;
+
     %{  
         # Deploy voting contract. Wait for acceptance of in the testnet
         voting_contract_address = deploy_contract(
@@ -25,14 +30,19 @@ func up() {
         ).contract_address
 
         # Assert if calling address can vote. The result from the getter function is a Python dict
-        starting_voter_status = call(
+        voter_status = call(
                     contract_address=voting_contract_address, 
                     function_name="get_voter_status", 
-                    inputs={"user_address": ids.VOTING_ADDRESS_1}
+                    inputs={"user_address": ids.VOTING_ADDRESS_1},
                     )
-        assert voter_status.status["allowed"] == 1
-        print(f"Voter with address {ids.VOTING_ADDRESS_1} is allowed to vote.")
+        ids.first_voter_status = voter_status.status["allowed"]
+        #print(f"Voter with address {ids.VOTING_ADDRESS_1} is allowed to vote.")
+        print(ids.first_voter_status)
+    %}
 
+    assert 1 = first_voter_status;
+
+    %{
         # Vote 1 with the address calling the voting contract (see migration code in CLI)
         invoke(
             contract_address=voting_contract_address,
@@ -51,17 +61,23 @@ func up() {
                     function_name="get_voter_status", 
                     inputs={"user_address": ids.VOTING_ADDRESS_1}
                     )
-        assert voter_status.status["allowed"] == 0
-        print(f"Voter with address {ids.VOTING_ADDRESS_1} is not allowed to vote.")
+        ids.first_voter_status = voter_status.status["allowed"]
+        #print(f"Voter with address {ids.VOTING_ADDRESS_1} is not allowed to vote.")
+        print(ids.first_voter_status)
+    %}
 
+    assert 0 = first_voter_status;
+
+    %{
         # Get the status of the vote after initial vote
         voting_status = call(
                     contract_address=voting_contract_address, 
                     function_name="get_voting_status", 
                     )
-        assert voting_status.status["votes_yes"] == 1
-        assert voting_status.status["votes_no"] == 0
-        print(f"Voting status: YES - {voting_status.status["votes_yes"]}; NO - {voting_status.status["votes_no"]}.")
+        ids.votes_yes = voting_status.status["votes_yes"]
+        ids.votes_no = voting_status.status["votes_no"]
+        print(ids.votes_yes)
+        #print(f"Voting status: YES - {YES}; NO - {NO}.")
     %}
     return ();
 }
