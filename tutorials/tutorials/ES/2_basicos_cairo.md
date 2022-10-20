@@ -8,7 +8,7 @@ Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo 
 
 ---
 
-## 1. sumr dos números
+## 1. Sumar dos números
 
 Para aprender los básicos de Cairo crearemos juntos una función para sumar dos números 🎓. El código es muy sencillo pero nos ayudará a entender mejor muchos conceptos de Cairo. Nos basaremos fuertemente en la [documentación de Cairo](https://www.cairo-lang.org/docs/). La documentación es excelente, al día de hoy no está lista para fungir como un tutorial estructurado para principiantes. Aquí buscamos solucionar esto 🦙.
 
