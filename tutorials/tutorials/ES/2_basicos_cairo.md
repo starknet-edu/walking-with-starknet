@@ -124,7 +124,7 @@ La definición de una función en Cairo tiene el siguiente formato:
 ```python
 func function(arg1: felt, arg2) -> (retornado: felt){
   // Cuerpo de la función
-  let (sum) = sum_two_numvers(num1 = NUM1, num2 = NUM2);
+  let (sum) = sum_two_numbers(num1 = NUM1, num2 = NUM2);
   return(returned=sum);
 }
 
