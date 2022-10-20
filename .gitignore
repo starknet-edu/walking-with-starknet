@@ -135,8 +135,10 @@ dmypy.json
 
 # code not ready yet
 tutorials/tutorials/ES/6_openzeppelin.md
-tutorials/tutorials/ES/5_votacion_on_chain.md
 tutorials/tutorials/ES/7_randomness.md
 tutorials/tutorials/ES/8_starknetpy.md
 src/DICEeliminar.cairo
 src/randomERC721.cairo
+scripts/
+scripts/deploy.py
+build/*
