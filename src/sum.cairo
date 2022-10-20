@@ -8,17 +8,17 @@ from starkware.cairo.common.serialize import serialize_word
 // @return sum (felt): value of the sum of the two numbers
 func sum_two_nums(num1: felt, num2: felt) -> (sum: felt) {
     alloc_locals;
-    local sum = num1+num2;
+    local sum = num1 + num2;
     return (sum=sum);
 }
 
-func main{output_ptr: felt*}(){
+func main{output_ptr: felt*}() {
     alloc_locals;
-    
+
     const NUM1 = 1;
     const NUM2 = 10;
 
-    let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2);
+    let (sum) = sum_two_nums(num1=NUM1, num2=NUM2);
     serialize_word(sum);
     return ();
 }

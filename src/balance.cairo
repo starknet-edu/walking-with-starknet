@@ -10,11 +10,9 @@ func balance() -> (res: felt) {
 
 // Increases the balance by the given amount.
 @external
-func increase_balance{
-    syscall_ptr: felt*,
-    pedersen_ptr: HashBuiltin*,
-    range_check_ptr,
-}(amount: felt) {
+func increase_balance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    amount: felt
+) {
     let (res) = balance.read();
     balance.write(res + amount);
     return ();
@@ -22,11 +20,7 @@ func increase_balance{
 
 // Returns the current balance.
 @view
-func get_balance{
-    syscall_ptr: felt*,
-    pedersen_ptr: HashBuiltin*,
-    range_check_ptr,
-}() -> (res: felt) {
+func get_balance{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (res: felt) {
     let (res) = balance.read();
     return (res=res);
 }

@@ -45,13 +45,13 @@ func ERC721_Metadata_tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, ra
 
     // let (token_id_ss_len, token_id_ss) = uint256_to_ss(token_id);
 
-    // Concatenate in an array the URI's base len, and base, the token_id's len and body 
+    // Concatenate in an array the URI's base len, and base, the token_id's len and body
     let (local number) = alloc();
     [number] = random_number;
 
     let (token_uri_temp, token_uri_len_temp) = concat_arr(
-                                base_token_uri_len, base_token_uri, 1, number
-                                );
+        base_token_uri_len, base_token_uri, 1, number
+    );
 
     // Store in suffix the array containing the suffix
     let (ERC721_base_token_uri_suffix_local) = erc721_base_tokenURI_suffix.read();
@@ -64,16 +64,14 @@ func ERC721_Metadata_tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, ra
     return (token_uri_len=token_uri_len, token_uri=token_uri);
 }
 
-
 // Save in storage all the base and suffix of the token URI
 func set_base_tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     token_uri_len: felt, token_uri: felt*, token_uri_suffix: felt
-    ) {
-    
-    // store the baseURI string into the erc721_baseURI storage variable 
+) {
+    // store the baseURI string into the erc721_baseURI storage variable
     _store_base_tokenURI(token_uri_len, token_uri);
 
-    // store the baseURI string length the erc721_baseURI_len storage variable 
+    // store the baseURI string length the erc721_baseURI_len storage variable
     erc721_baseURI_len.write(token_uri_len);
 
     // store the tokenURI suffix (e.g. json) in the erc721_base_tokenURI_suffix storage variable
@@ -84,7 +82,7 @@ func set_base_tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_che
 // Store the value of an array into an storage variable
 func _store_base_tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     token_uri_len: felt, token_uri: felt*
-    ) {
+) {
     if (token_uri_len == 0) {
         return ();
     }
