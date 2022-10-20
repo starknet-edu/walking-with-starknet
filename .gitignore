@@ -142,5 +142,7 @@ src/randomERC721.cairo
 scripts/
 scripts/deploy.py
 build/*
-migrations/*
+migrations/*.json
+
+# private key
 pkey
