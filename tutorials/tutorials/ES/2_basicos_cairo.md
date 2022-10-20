@@ -8,7 +8,7 @@ Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo 
 
 ---
 
-## 1. sumr dos números
+## 1. Sumar dos números
 
 Para aprender los básicos de Cairo crearemos juntos una función para sumar dos números 🎓. El código es muy sencillo pero nos ayudará a entender mejor muchos conceptos de Cairo. Nos basaremos fuertemente en la [documentación de Cairo](https://www.cairo-lang.org/docs/). La documentación es excelente, al día de hoy no está lista para fungir como un tutorial estructurado para principiantes. Aquí buscamos solucionar esto 🦙.
 
@@ -124,7 +124,7 @@ La definición de una función en Cairo tiene el siguiente formato:
 ```python
 func function(arg1: felt, arg2) -> (retornado: felt){
   // Cuerpo de la función
-  let (sum) = sum_two_numvers(num1 = NUM1, num2 = NUM2);
+  let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2);
   return(returned=sum);
 }
 
@@ -181,7 +181,7 @@ func main{output_ptr: felt*}():
     const NUM1 = 1
     const NUM2 = 10
 
-    let (sum) = sum_two_numbers(num1 = NUM1, num2 = NUM2)
+    let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2)
     serialize_word(word=sum)
     return ()
 end
@@ -207,7 +207,7 @@ Así definimos una variable local: `local a = 3`.
 Como ejemplo, mira esta parte de nuestra función que suma dos números:
 
 ```python
-func sum_two_numbers(num1: felt, num2: felt) -> (sum):
+func sum_two_nums(num1: felt, num2: felt) -> (sum):
     alloc_locals
     local sum = num1+num2
     return(sum)
