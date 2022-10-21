@@ -145,9 +145,9 @@ func main{range_check_ptr : felt}(){
 
 ¿Sencillo, cierto? Solo son formas diferentes de hacer asserts.
 
-¿Pero qué pasa si queremos comparar `10/3 < 10`? Sabemos que esto es cierto, pero también sabemos que `10/3` nos dara un entero grande; el resultado de la división no es un entero por lo que cae fuera del rango de posibles valores que pueden tomar los felts. Habrá overflow y se generará el entero grande que naturalmente será mayor que 10 o incluso resultará que está fuera de los enteros posibles que un felt puede tomar (por lo grande que es).
+¿Pero qué pasa si queremos comparar `10/3 < 10`? Sabemos que esto es cierto, pero también sabemos que el resultado de la división `10/3` no es un entero por lo que cae fuera del rango de posibles valores que pueden tomar los felts. Habrá overflow y se generará un valor que resultará estar fuera de los enteros posibles que un felt puede tomar (por lo grande que es).
 
-En efecto la siguiente la función que compara `10/3 < 10` nos retornará un error: `AssertionError: a = 2412335192444087475798215188730046737082071476887731133315394704090581346994 is out of range.`
+En efecto la siguiente función que compara `10/3 < 10` nos retornará un error: `AssertionError: a = 2412335192444087475798215188730046737082071476887731133315394704090581346994 is out of range.`
 
 ```python
 %builtins range_check
