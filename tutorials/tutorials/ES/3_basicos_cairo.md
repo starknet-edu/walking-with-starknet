@@ -8,7 +8,7 @@ Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo 
 
 ---
 
-En la tercera parte de la serie de tutoriales básicos de Cairo profundizaremos en conceptos introducidos en la [segunda sesión](https://mirror.xyz/defilatam.eth/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w) como los `builtin`, los `felt` y `assert` y sus variaciones. Además, introduciremos los arrays. Con lo aprendido en esta sesión seremos capaces de crear contratos básicos en Cairo 🚀.
+En la tercera parte de la serie de tutoriales básicos de Cairo profundizaremos en conceptos introducidos en la [segunda sesión](https://github.com/starknet-edu/walking-with-starknet/blob/master/tutorials/tutorials/ES/2_basicos_cairo.md) como los `builtin`, los `felt` y `assert` y sus variaciones. Además, introduciremos los arrays. Con lo aprendido en esta sesión seremos capaces de crear contratos básicos en Cairo 🚀.
 
 ## 1. Los builtin y su relación con los pointers
 
