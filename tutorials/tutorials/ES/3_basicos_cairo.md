@@ -48,7 +48,7 @@ Cualquier valor que no se encuentre dentro de este rango causará un “overflow
 
 Ahora entendemos los límites de los felt. Si el valor es 0.5, por ejemplo, tenemos un overflow. ¿Dónde experimentaremos overflows frecuentemente? En las divisiones. El siguiente contrato (el código completo está en [src/division1.cairo](../../../src/multiplicacion.cairo)) divide 9/3, revisa con `assert` que el resultado sea 3, e imprime el resultado.
 
-- *Recuerda lo que vimos al final del [primer tutorial](https://mirror.xyz/defilatam.eth/wghrgfkoODULMmaGU5DtKH2vBPQXc4yDhUjtN-RZeak) sobre cómo compilar y correr nuestros programas.*
+- *Recuerda lo que vimos al final del [primer tutorial](1_instalacion.md) sobre cómo compilar y correr nuestros programas.*
 
 ```python
 %builtins output
