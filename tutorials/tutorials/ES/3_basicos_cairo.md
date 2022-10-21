@@ -179,7 +179,7 @@ func main{range_check_ptr : felt}(){
 
 ## 4. La doble naturaleza de assert
 
-Como hemos visto, `assert` es clave para la programación en Cairo. En los ejemplos arriba lo utilizamos para confirmar una declaración, `assert y = 10`. Este es un uso común en otros lenguajes de programación como Python. Pero en Cairo cuando tratas de `assert` algo que no está asignado aún, `assert` funciona para asignar. Mira esté ejemplo adaptado del [Bootcamp de StarkNet en Amsterdam](https://github.com/lightshiftdev/starknet-bootcamp/blob/main/packages/contracts/samples/04-cairo-math.cairo) que también nos sirve para afianzar lo aprendido sobre las structs en el [tutorial pasado](https://mirror.xyz/dashboard/edit/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w). El código completo está en [src/vector.cairo](../../../src/vector.cairo). 
+Como hemos visto, `assert` es clave para la programación en Cairo. En los ejemplos arriba lo utilizamos para confirmar una declaración, `assert y = 10`. Este es un uso común en otros lenguajes de programación como Python. Pero en Cairo cuando tratas de `assert` algo que no está asignado aún, `assert` funciona para asignar. Mira esté ejemplo adaptado del [Bootcamp de StarkNet en Amsterdam](https://github.com/lightshiftdev/starknet-bootcamp/blob/main/packages/contracts/samples/04-cairo-math.cairo) que también nos sirve para afianzar lo aprendido sobre las structs en el [tutorial pasado](2_basicos_cairo.md). El código completo está en [src/vector.cairo](../../../src/vector.cairo). 
 
 ```python
  %builtins output
