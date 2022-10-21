@@ -16,7 +16,7 @@ Aquí está nuestro código para sumar dos números. Puedes pegarlo directamente
 
 No te preocupes si no entiendes en este punto todo lo que está sucediendo. Pero [@espejelomar](https://twitter.com/espejelomar) se preocupará si al final del tutorial no comprendes cada línea de este código. Avísame si es así porque mejoraremos 🧐. Cairo es un lenguaje low-level por lo que será más díficil que aprender Python, por ejemplo. Pero valdrá la pena 🥅. Ojos en la meta.
 
-Veamos línea por línea y con ejemplos adicionales lo que estamos haciendo. El programa entero para sumar los dos números está disponible en [src/sum.cairo](../../../src/suma.cairo). Ahí encontrarás el código correctamente comentado.
+Veamos línea por línea y con ejemplos adicionales lo que estamos haciendo. El programa entero para sumar los dos números está disponible en [src/sum.cairo](../../../src/sum.cairo). Ahí encontrarás el código correctamente comentado.
 
 ```python
 %builtins output
@@ -46,12 +46,11 @@ func main{output_ptr: felt*}(){
 
 ```
 
-## 2. Los builtins**
+## 2. Los builtins
 
 Al comienzo de nuestro programa en Cairo escribimos `%builtins output`. Aquí estamos diciendo al compilador de Cairo que usaremos el `builtin` llamado `output`. La definición de `builtin` es bastante técnica y sale del alcance de este primer tutorial ([aquí esta](https://www.cairo-lang.org/docs/how_cairo_works/builtins.html#builtins) en la documentación). Por el momento, nos basta indicar que podemos convocar capacidades especiales de Cairo a través de los builtins. Si sabes C++ seguramente ya encontraste las similitudes.
 
 > El builtin output es lo que permite que el programa se comunique con el mundo exterior. Puedes considerarlo como el equivalente de `print()` en Python o `std::cout` de C++ ([documentación de Cairo](https://www.cairo-lang.org/docs/hello_cairo/intro.html#writing-a-main-function)).
-> 
 
 La interacción entre `builtin` `output` y la función `serialize_word`, que importamos previamente, nos permitirá imprimir a la consola. En este caso con `serialize_word(sum)`. No te preocupes, más adelante lo veremos más de cerca.
 
@@ -282,7 +281,7 @@ Indicamos en el argumento --program que queremos correr el build/sum.json que ge
 
 Con --print_output indicamos que queremos imprimir algo de nuestro programa en la terminal. Por ejemplo, en el siguiente tutorial usaremos el builtin (más adelante los estudiaremos) output y la función serialize_word para imprimir en la terminal.
 
---layout nos permite indicar el layout a utilizar. Según los builtins que utilicemos, será el layout a utilizar. Más adelante estaremos usando el builtin output y para esto necesitamos el layout small. Abajo una foto de los builtins que cubre el layout small. Si no usaremos ningún builtin entonces podemos dejar este argumento vacío por lo que usaríamos el layout default, el plain.
+--layout nos permite indicar el layout a utilizar. Según los builtins que utilicemos, será el layout a utilizar. Más adelante estaremos usando el builtin output y para esto necesitamos el layout small. Si no usaremos ningún builtin entonces podemos dejar este argumento vacío por lo que usaríamos el layout default, el layout plain.
 
 
 ## **14. Conclusión**
