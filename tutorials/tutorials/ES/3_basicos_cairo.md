@@ -118,7 +118,7 @@ Program output:
 
 Cairo logra esto al volver al realizar un overflowing de nuevo. No entremos en detalles matemáticos. Esto es algo poco intuitivo pero no te preocupes, hasta aquí lo podemos dejar.
 
-> Una vez que estás escribiendo contratos con Cairo no necesitas estar pensando constantemente en esto [las particularidades de los felts cuando están en divisiones]. Pero es bueno que estar consciente de cómo funcionan (StarkNet Bootcamp - Amsterdam - min 1:31:00).
+> Una vez que estás escribiendo contratos con Cairo no necesitas estar pensando constantemente en esto [las particularidades de los felts cuando están en divisiones]. Pero es bueno estar consciente de cómo funcionan (StarkNet Bootcamp - Amsterdam - min 1:31:00).
 > 
 
 ## **3. Comparando felts 💪**
