@@ -157,13 +157,13 @@ Dicho esto, veamos cómo se ve una función con un argumento ímplicito. La func
 ```python
 %builtins output
 
-func serialize_word{output_ptr : felt*}(word : felt):
+func serialize_word{output_ptr : felt*}(word : felt){
     assert [output_ptr] = word
     let output_ptr = output_ptr + 1
     # The new value of output_ptr is implicitly
     # added in return.
     return ()
-end
+}
 
 ```
 
@@ -174,7 +174,7 @@ En el ejemplo con la función `serialize_word` definimos que vamos a recibir u
 Siguiendo la regla definida al comienzo, cualquier función que llame a `serialize_word` tendrá que también recibir el argumento ímplicito `output_ptr`. Por ejemplo, una parte de nuestra función para sumar dos números va así:
 
 ```python
-func main{output_ptr: felt*}():
+func main{output_ptr: felt*}(){
     alloc_locals
 
     const NUM1 = 1
@@ -183,7 +183,7 @@ func main{output_ptr: felt*}():
     let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2)
     serialize_word(word=sum)
     return ()
-end
+}
 
 ```
 
@@ -206,11 +206,11 @@ Así definimos una variable local: `local a = 3`.
 Como ejemplo, mira esta parte de nuestra función que suma dos números:
 
 ```python
-func sum_two_nums(num1: felt, num2: felt) -> (sum):
+func sum_two_nums(num1: felt, num2: felt) -> (sum){
     alloc_locals
     local sum = num1+num2
     return(sum)
-end
+}
 
 ```
 
