@@ -27,7 +27,7 @@ En este tutorial aprenderemos a desplegar contratos a la devnet y la testnet. En
 
 ## 1. Instalación de Protostar
 
-En este punto ya tenemos instalado `cairo-lang`. Si no, puedes revisar [nuestro tutorial](https://medium.com/starknet-en-espa%C3%B1ol/programando-en-la-l2-de-ethereum-b%C3%A1sicos-de-cairo-pt-1-8cc6c94571f1) sobre cómo instalarlo.
+En este punto ya tenemos instalado `cairo-lang`. Si no, puedes revisar [nuestro tutorial](1_instalacion.md) sobre cómo instalarlo.
 
 En Ubuntu o MacOS (no está disponible para Windows) corre el siguiente comando:
 
