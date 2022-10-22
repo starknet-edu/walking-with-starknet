@@ -298,7 +298,7 @@ let (matrix_array : Matrix*) = alloc();
 
 ```
 
-Ya pasamos lo complicado 😴. Ahora veamos cómo rellenar nuestro array con structuras `Matrix`. Usamos `assert` y podemos indexar con `[]` la posición del array que queremos alterar o revisar:
+Ya pasamos lo complicado 😴. Ahora veamos cómo rellenar nuestro array con estructuras `Matrix`. Usamos `assert` y podemos indexar con `[]` la posición del array que queremos alterar o revisar:
 
 ```
 assert matrix_array[0] = Matrix(x = v1, y = v2);
