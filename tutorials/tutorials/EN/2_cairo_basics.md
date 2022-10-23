@@ -81,11 +81,11 @@ struct MyStruct{
 }
 
 ```
-So we define a new data type called `MiStruct` with the properties `primer_miembro` and `segundo_miembro`. We set the `type` of both properties to be `felt` but we may as well have put in other types. When we create a `struct` it is mandatory to add the `type`.
+So we define a new data type called `MyStruct` with the properties `first_member` and `second_member`. We set the `type` of both properties to be `felt` but we may as well have put in other types. When we create a `struct` it is mandatory to add the `type`.
 
-We can create a variable of type `MiStruct`: `Nombre = (primer_miembro=1, segundo_miembro=4)`. Now the variable `Nombre` has `type` `MiStruct`.
+We can create a variable of type `MyStruct`: `Name = (first_member=1, second_member=4)`. Now the variable `Name` has `type` `MyStruct`.
 
-With `Nombre.primer_miembro` we can access the value of this argument, in this case it is 1.
+With `Name.first_member` we can access the value of this argument, in this case it is 1.
 
 ## **6. Tuples
 
@@ -117,8 +117,8 @@ let b = tuple4[0][1][2]  # let b = 13.
 The definition of a function in Cairo has the following format:
 
 ```python
-func function(arg1: felt, arg2) -> (retornado: felt){
-  // Cuerpo de la función
+func function(arg1: felt, arg2) -> (returned: felt){
+  // Function body
   let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2);
   return(returned=sum);
 }
@@ -127,7 +127,7 @@ func function(arg1: felt, arg2) -> (retornado: felt){
 
 - **Define the scope of the function**. We start the function with `func`. The scope of our function is defined with curly braces {}. 
 - **Arguments and names**. We define the arguments that the function receives in parentheses next to the name that we define for our function, `function` in this case. The arguments can carry their type defined or not. In this case `arg1` must be of type `felt` and `arg2` can be of any type.
-- **Return**. We necessarily have to add `return()`. Although the function is not returning something. In this case we are returning a variable called `returned` so we put `return(retornado=suma)` where suma is the value that the `returned` variable will take.
+- **Return**. We necessarily have to add `return()`. Although the function is not returning something. In this case we are returning a variable called `returned` so we put `return(returned=sum)` where suma is the value that the `returned` variable will take.
 - **Comments**. In Cairo we comment with `//`. This code will not be interpreted when running our program.
 
 As with other programming languages. We will need a `main()` function that orchestrates the use of our program in Cairo. It is defined exactly the same as a normal function only with the name `main()`. It can come before or after the other functions we create in our program.
@@ -198,7 +198,7 @@ Thus we define a local variable: `local a = 3`.
 As an example, look at this part of our function that adds two numbers:
 
 ```python
-func sum_two_numbers(num1: felt, num2: felt) -> (sum):
+func sum_two_nums(num1: felt, num2: felt) -> (sum):
     alloc_locals
     local sum = num1+num2
     return(sum)
@@ -224,7 +224,7 @@ const NUM1 = 1
 This is the format to define one:
 
 ```python
-let ref_nombre : ref_type = ref_expr
+let ref_number : ref_type = ref_expr
 
 ```
 
@@ -237,10 +237,10 @@ let a = 7  // a is initially bound to expression 7.
 let a = 8  // a is now bound to expression 8.
 
 ```
-In our addition of two numbers we create a reference called `sum`. We see that we assign to `sum` the `felt` that the function `suma_dos_nums` returns.
+In our addition of two numbers we create a reference called `sum`. We see that we assign to `sum` the `felt` that the function `sum_two_nums` returns.
 
 ```python
-let (sum) = suma_dos_nums(num1 = NUM1, num2 = NUM2)
+let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2)
 
 ```
 
