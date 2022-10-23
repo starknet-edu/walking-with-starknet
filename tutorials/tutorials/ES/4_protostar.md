@@ -237,13 +237,13 @@ Es importante guardar el contract address pues interactuaremos con él en siguie
 
 Si desplegaste en la testnet puedes usar la contract address para interactuar con tu contrato en un block explorar: [Voyager](https://goerli.voyager.online/) o [StarkScan](https://testnet.starkscan.co/). Estos block explorers son equivalentes a [Etherscan](https://goerli.voyager.online/) para la L1.
 
-La ventaja de desplegar en la devnet primero es que podemos interactuar mpas rápidemente con nuestros contratos. Para la testnet tendremos que esperar cerca de de minutos.
+La ventaja de desplegar en la devnet primero es que podemos interactuar más rápidemente con nuestros contratos. Para la testnet tendremos que esperar cerca de unos minutos.
 
 ## 7. Desplegando con la CLI de `starknet`
 
 Por debajo, Protostar está utilizando el CLI de `starknet` para desplegar. Hay ocasiones en las que no queremos depender completamente de Protostar, por ejemplo cuando hay una actualización de StarkNet y aún no es aplicada en la biblioteca de Protostar.
 
-Más adelate exploraremos a fondo la CLI de `starknet`. Por ahora veamos cómo desplegar exactamente el mismo contrato.
+Más adelante exploraremos a fondo la CLI de `starknet`. Por ahora veamos cómo desplegar exactamente el mismo contrato.
 
 Para la devnet, una vez que la encendiste en el gateway http://127.0.0.1:5050, sería:
 
