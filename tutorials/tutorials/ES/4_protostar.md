@@ -235,9 +235,9 @@ Transaction hash: 0x05a2f78261444b97b155417a5734210abe2ee1081b7f12f39f660321fd10
 
 Es importante guardar el contract address pues interactuaremos con él en siguientes funciones. Esto lo revisaremos en otros tutoriales.
 
-Si desplegaste en la testnet puedes usar la contract address para interactuar con tu contrato en un block explorar: [Voyager](https://goerli.voyager.online/) o [StarkScan](https://testnet.starkscan.co/). Estos block explorers son equivalentes a [Etherscan](https://goerli.voyager.online/) para la L1.
+Si desplegaste en la testnet puedes usar la contract address para interactuar con tu contrato en un block explorer: [Voyager](https://goerli.voyager.online/) o [StarkScan](https://testnet.starkscan.co/). Estos block explorers son equivalentes a [Etherscan](https://goerli.voyager.online/) para la L1.
 
-La ventaja de desplegar en la devnet primero es que podemos interactuar mpas rápidemente con nuestros contratos. Para la testnet tendremos que esperar cerca de de minutos.
+La ventaja de desplegar en la devnet primero es que podemos interactuar más rápidamente con nuestros contratos. Para la testnet tendremos que esperar cerca de unos minutos.
 
 ## 7. Desplegando con la CLI de `starknet`
 
