@@ -35,19 +35,19 @@ Repositorio del [proyecto](https://github.com/dpinones/starknet-debug-protostar)
 
 
 ## 4. Contrato main
-El contrato main tiene una @storage_var llamada balance. También tiene la función llamada `get_balance` que retorna el balance actual y también tiene la función llamada `increase_balance` para aumentar el balance. El balance inicia en 0.
+El contrato main tiene una `@storage_var` llamada balance. También tiene la función llamada `get_balance` que retorna el balance actual y también tiene la función llamada `increase_balance` para aumentar el balance. El balance inicia en 0.
 
-A la función llamada `increase_value` le vamos a hacer debugging.
+A la función llamada `increase_balance` le vamos a hacer debugging.
 
 ![portada](https://miro.medium.com/max/1400/1*swGdfWoI8kMS2fey_OtxEQ.png)
 
 ## 5. Test
-Test de la función `increase_value`.
+Test de la función `increase_balance`.
 
 ![portada](https://miro.medium.com/max/1400/1*lEXdfjJC4qATkf8pe4DsIA.png)
 
 ## 6. Agregar hint
-A la función `increase_value` le agregamos un hint. En este armamos un json con los datos que quiero enviar al server. Para este caso quiero ver el balance actual y el nuevo balance.
+A la función `increase_balance` le agregamos un hint. En este armamos un json con los datos que quiero enviar al server. Para este caso quiero ver el balance actual y el nuevo balance.
 
 Si observamos la forma de poder acceder desde el hint a las variables de Cairo es agregando adelante `ids.nombre-de-la-variable`. Ejemplo: `ids.new_balance` corresponde a la variable tempvar definida en la línea 18.
 
@@ -60,8 +60,8 @@ Levantamos el server en otra terminal y la dejamos corriendo.
 
 ![portada](https://miro.medium.com/max/1400/1*KwDAlzqACgp8zoAOLXk9-w.png)
 
-## 7. Test
-Al ejecutar el comando test de protostar hay especificar que deseamos usar hints no incluidos en la lista blanca de hints. Para esto a la hora de ejecutar el test debemos agregar la siguiente bandera: --disable-hint-validation.
+## 7. Ejecutar test
+Al ejecutar el comando test de protostar hay especificar que deseamos usar hints no incluidos en la lista blanca de hints. Para esto a la hora de ejecutar el test debemos agregar la siguiente bandera: `--disable-hint-validation`.
 
 En este caso queremos ejecutar el test llamado `test_increase_balance`.
 
@@ -70,7 +70,6 @@ En este caso queremos ejecutar el test llamado `test_increase_balance`.
 ![portada](https://miro.medium.com/max/1400/1*VXZGnJYOyHLYugXDYtMNww.png)
 
 Se ejecutó el test correctamente, por lo tanto debemos revisar la terminal donde esta corriendo el server para ver que se estén imprimiendo los datos que estamos enviando.
-
 
 ## 7. Resultado
 Como vemos en la terminal se visualiza el balance actual y el nuevo balance que es lo que queríamos. Como vemos en el test llamado `test_increase_balance`, incrementa el balance en dos oportunidades. Primero llama a la función con el valor 42 entonces el balance es 42 y luego llama a la función con el valor 58 entonces el balance es 100. Coincide con los valores mostrados en la terminal.
