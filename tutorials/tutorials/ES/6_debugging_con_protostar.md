@@ -1,4 +1,4 @@
-# Cómo hacer Debugging a un Contrato Cairo con Protostar
+# Haciendo debugging a un contrato de Cairo con Protostar
 
 ![portada](https://miro.medium.com/max/1400/1*fUl7yt9SYXqAOhpW6vMmyA.png)
 
