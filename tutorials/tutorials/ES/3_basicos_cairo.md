@@ -8,13 +8,13 @@ Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo 
 
 ---
 
-En la tercera parte de la serie de tutoriales básicos de Cairo profundizaremos en conceptos introducidos en la [segunda sesión](https://mirror.xyz/defilatam.eth/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w) como los `builtin`, los `felt` y `assert` y sus variaciones. Además, introduciremos los arrays. Con lo aprendido en esta sesión seremos capaces de crear contratos básicos en Cairo 🚀.
+En la tercera parte de la serie de tutoriales básicos de Cairo profundizaremos en conceptos introducidos en la [segunda sesión](https://github.com/starknet-edu/walking-with-starknet/blob/master/tutorials/tutorials/ES/2_basicos_cairo.md) como los `builtin`, los `felt` y `assert` y sus variaciones. Además, introduciremos los arrays. Con lo aprendido en esta sesión seremos capaces de crear contratos básicos en Cairo 🚀.
 
 ## 1. Los builtin y su relación con los pointers
 
-En el siguiente programa estamos multiplicando dos números. El código entero está disponible en [src/multiplicacion.cairo](../../../src/multiplication.cairo). Ahí encontrarás el código correctamente comentado.
+En el siguiente programa estamos multiplicando dos números. El código entero está disponible en [src/multiplication.cairo](../../../src/multiplication.cairo). Ahí encontrarás el código correctamente comentado.
 
-```rust
+```python
 %builtins output
 
 from starkware.cairo.common.serialize import serialize_word
@@ -46,9 +46,7 @@ Si bien no es necesario ser un@ expert@ en las cualidades matemáticas de los fe
 
 Cualquier valor que no se encuentre dentro de este rango causará un “overflow”: un error que ocurre cuando un programa recibe un número, valor o variable fuera del alcance de su capacidad para manejar ([Techopedia](https://www.techopedia.com/definition/663/overflow-error#:~:text=In%20computing%2C%20an%20overflow%20error,other%20numerical%20types%20of%20variables.)).
 
-Ahora entendemos los límites de los felt. Si el valor es 0.5, por ejemplo, tenemos un overflow. ¿Dónde experimentaremos overflows frecuentemente? En las divisiones. El siguiente contrato (el código completo está en [src/division1.cairo](../../../src/multiplicacion.cairo)) divide 9/3, revisa con `assert` que el resultado sea 3, e imprime el resultado.
-
-- *Recuerda lo que vimos al final del [primer tutorial](1_instalacion.md) sobre cómo compilar y correr nuestros programas.*
+Ahora entendemos los límites de los felt. Si el valor es 0.5, por ejemplo, tenemos un overflow. ¿Dónde experimentaremos overflows frecuentemente? En las divisiones. El siguiente contrato (el código completo está en [src/division1.cairo](../../../src/division1.cairo)) divide 9/3, revisa con `assert` que el resultado sea 3, e imprime el resultado.
 
 ```python
 %builtins output
@@ -65,7 +63,7 @@ func main{output_ptr: felt*}(){
 
 ```
 
-Hasta ahora todo hace sentido. ¿Pero qué pasa si el resultado de la división no es un entero como en el siguiente contrato (el código está en [src/division2.cairo](../../../src/multiplicacion.cairo))?
+Hasta ahora todo hace sentido. ¿Pero qué pasa si el resultado de la división no es un entero como en el siguiente contrato (el código está en [src/division2.cairo](../../../src/division2.cairo))?
 
 ```python
 %builtins output
@@ -145,7 +143,7 @@ func main{range_check_ptr : felt}(){
 
 ¿Sencillo, cierto? Solo son formas diferentes de hacer asserts.
 
-¿Pero qué pasa si queremos comparar `10/3 < 10`? Sabemos que esto es cierto, pero también sabemos que `10/3` nos dara un entero grande; el resultado de la división no es un entero por lo que cae fuera del rango de posibles valores que pueden tomar los felts. Habrá overflow y se generará el entero grande que naturalmente será mayor que 10 o incluso resultará que está fuera de los enteros posibles que un felt puede tomar (por lo grande que es).
+¿Pero qué pasa si queremos comparar `10/3 < 10`? Sabemos que esto es cierto, pero también sabemos que el resultado de `10/3` no es un entero, por lo que cae fuera del rango de posibles valores que puedan tomar los felts. Habrá overflow y se generará el entero grande que naturalmente será mayor que 10 o incluso resultará que está fuera de los enteros posibles que un felt puede tomar (por lo grande que es).
 
 En efecto la siguiente la función que compara `10/3 < 10` nos retornará un error: `AssertionError: a = 2412335192444087475798215188730046737082071476887731133315394704090581346994 is out of range.`
 
@@ -179,7 +177,7 @@ func main{range_check_ptr : felt}(){
 
 ## 4. La doble naturaleza de assert
 
-Como hemos visto, `assert` es clave para la programación en Cairo. En los ejemplos arriba lo utilizamos para confirmar una declaración, `assert y = 10`. Este es un uso común en otros lenguajes de programación como Python. Pero en Cairo cuando tratas de `assert` algo que no está asignado aún, `assert` funciona para asignar. Mira esté ejemplo adaptado del [Bootcamp de StarkNet en Amsterdam](https://github.com/lightshiftdev/starknet-bootcamp/blob/main/packages/contracts/samples/04-cairo-math.cairo) que también nos sirve para afianzar lo aprendido sobre las structs en el [tutorial pasado](https://mirror.xyz/dashboard/edit/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w). El código completo está en [src/vector.cairo](../../../src/vector.cairo). 
+Como hemos visto, `assert` es clave para la programación en Cairo. En los ejemplos arriba lo utilizamos para confirmar una declaración, `assert y = 10`. Este es un uso común en otros lenguajes de programación como Python. Pero en Cairo cuando tratas de `assert` algo que no está asignado aún, `assert` funciona para asignar. Mira esté ejemplo adaptado del [Bootcamp de StarkNet en Amsterdam](https://github.com/lightshiftdev/starknet-bootcamp/blob/main/packages/contracts/samples/04-cairo-math.cairo) que también nos sirve para afianzar lo aprendido sobre las structs en el [tutorial pasado](2_basicos_cairo.md). El código completo está en [src/vector.cairo](../../../src/vector.cairo). 
 
 ```python
  %builtins output
@@ -213,8 +211,6 @@ func main{output_ptr: felt*}(){
 
     return();
 }
-
-
 ```
 
 Al correr `assert res.x = v1.x + v2.x`, el prover (más sobre esto más adelante) de Cairo detecta que `res.x` no existe por lo que le asigna el nuevo valor `v1.x + v2.x`. Si volvieramos a correr `assert res.x = v1.x + v2.x`, el prover sí compararía lo que encuentra asignado en `res.x` con lo que intentamos asignar. Es decir, el uso que ya conocíamos.
@@ -272,37 +268,33 @@ func main{output_ptr: felt*}(){
 
     return();
 }
-
 ```
 
 Creamos un array de felts llamado `my_array`. Esta es la forma en que se define:
 
 ```
 let (my_array : felt*) = alloc();
-
 ```
 
-Es poco intuitivo en comparación con lo fácil que es en Python y otros lenguajes. `my_array : felt*` define una variable llamada `my_array` que contendrá un pointer (ver [tutorial pasado](https://mirror.xyz/dashboard/edit/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w)) a un felt (aún no definimos a qué felt). ¿Por qué? La documentación de Cairo nos ayuda:
+Es poco intuitivo en comparación con lo fácil que es en Python y otros lenguajes. `my_array : felt*` define una variable llamada `my_array` que contendrá un pointer (ver [tutorial pasado](2_basicos_cairo.md)) a un felt (aún no definimos a qué felt). ¿Por qué? La documentación de Cairo nos ayuda:
 
 > “Los arrays se pueden definir como un pointer (felt*) al primer elemento del array. A medida que se llena el array, los elementos ocupan celdas de memoria contiguas. La función alloc() se usa para definir un segmento de memoria que expande su tamaño cada vez que se escribe un nuevo elemento en el array (documentación de Cairo)”.
 > 
 
 Entonces, en el caso de `my_array`, al colocar el `alloc()` estamos indicando que el segmento de memoria al que la expresión `my_array` apunta (recuerda que `my_array` es solo el nombre de un pointer, `felt*`, en memoria) será expandido cada vez que se escriba un nuevo elemento en `my_array`.
 
-De hecho, si pasamos [al repo](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/alloc.cairo) donde se encuentra `alloc()` veremos que retorna `(ptr : felt*)`. Es decir, nos regresa una tupla de un solo miembro que es un `felt*` (un pointer a un `felt`). Por ser una tupla la recibimos con un `let` y con `my_array : felt*` entre paréntesis (ver [básicos de Cairo pt. 2](https://mirror.xyz/defilatam.eth/RPaAyK467IwmeSFII4YqfD0EuLjAYeD3ZOptOzXfj9w)). Todo va haciendo sentido, ¿cierto 🙏?
+De hecho, si pasamos [al repo](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/alloc.cairo) donde se encuentra `alloc()` veremos que retorna `(ptr : felt*)`. Es decir, nos regresa una tupla de un solo miembro que es un `felt*` (un pointer a un `felt`). Por ser una tupla la recibimos con un `let` y con `my_array : felt*` entre paréntesis (ver [básicos de Cairo pt. 2](2_basicos_cairo.md     y)). Todo va haciendo sentido, ¿cierto 🙏?
 
 Vemos que la definición de nuestro array de matrices es exactamente igual salvo que en vez de querer un array de `felt` queremos uno de `Matrix`:
 
 ```python
 let (matrix_array : Matrix*) = alloc();
-
 ```
 
 Ya pasamos lo complicado 😴. Ahora veamos cómo rellenar nuestro array con structuras `Matrix`. Usamos `assert` y podemos indexar con `[]` la posición del array que queremos alterar o revisar:
 
 ```
 assert matrix_array[0] = Matrix(x = v1, y = v2);
-
 ```
 
 Lo que hicimos fue crear una `Matrix(x = v1, y = v2)` y asignarla a la posición 0 de nuestra `matrix_array`. Recuerda que empezamos a contar desde 0. Rellenar nuestro array de `felt` es aún más trivial: `assert my_array[0] = 1`.
