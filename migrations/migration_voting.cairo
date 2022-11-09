@@ -47,7 +47,9 @@ func up() {
     assert 1 = before_voting_status;
 
     %{
-        print(f"Voter with address {ids.VOTING_ADDRESS_1} is allowed to vote.")
+        from console import fg
+        
+        print(fg.green, fx.italic, f"Voter with address {ids.VOTING_ADDRESS_1} is allowed to vote.", fx.end, sep='')
         
         # Vote 1 with the address calling the voting contract (see migration code in CLI)
         invoke(

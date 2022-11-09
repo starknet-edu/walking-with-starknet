@@ -137,12 +137,16 @@ dmypy.json
 tutorials/tutorials/ES/6_openzeppelin.md
 tutorials/tutorials/ES/7_randomness.md
 tutorials/tutorials/ES/8_starknetpy.md
+tutorials/tutorials/ES/6_starknet_CLI.md
 src/DICEeliminar.cairo
 src/randomERC721.cairo
 scripts/
 scripts/deploy.py
 build/*
 migrations/*.json
+assets
+assets/*
+
 
 # private key
 pkey
