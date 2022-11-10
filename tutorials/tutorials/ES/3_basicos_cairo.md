@@ -116,7 +116,7 @@ Program output:
 
 Cairo logra esto al volver al realizar un overflowing de nuevo. No entremos en detalles matemáticos. Esto es algo poco intuitivo pero no te preocupes, hasta aquí lo podemos dejar.
 
-> Una vez que estás escribiendo contratos con Cairo no necesitas estar pensando constantemente en esto [las particularidades de los felts cuando están en divisiones]. Pero es bueno que estar consciente de cómo funcionan (StarkNet Bootcamp - Amsterdam - min 1:31:00).
+> Una vez que estás escribiendo contratos con Cairo no necesitas estar pensando constantemente en esto [las particularidades de los felts cuando están en divisiones]. Pero es bueno estar consciente de cómo funcionan (StarkNet Bootcamp - Amsterdam - min 1:31:00).
 > 
 
 ## **3. Comparando felts 💪**
@@ -143,9 +143,9 @@ func main{range_check_ptr : felt}(){
 
 ¿Sencillo, cierto? Solo son formas diferentes de hacer asserts.
 
-¿Pero qué pasa si queremos comparar `10/3 < 10`? Sabemos que esto es cierto, pero también sabemos que el resultado de `10/3` no es un entero, por lo que cae fuera del rango de posibles valores que puedan tomar los felts. Habrá overflow y se generará el entero grande que naturalmente será mayor que 10 o incluso resultará que está fuera de los enteros posibles que un felt puede tomar (por lo grande que es).
+¿Pero qué pasa si queremos comparar `10/3 < 10`? Sabemos que esto es cierto, pero también sabemos que el resultado de la división `10/3` no es un entero por lo que cae fuera del rango de posibles valores que pueden tomar los felts. Habrá overflow y se generará un valor que resultará estar fuera de los enteros posibles que un felt puede tomar (por lo grande que es).
 
-En efecto la siguiente la función que compara `10/3 < 10` nos retornará un error: `AssertionError: a = 2412335192444087475798215188730046737082071476887731133315394704090581346994 is out of range.`
+n efecto la siguiente función que compara `10/3 < 10` nos retornará un error: `AssertionError: a = 2412335192444087475798215188730046737082071476887731133315394704090581346994 is out of range.`
 
 ```python
 %builtins range_check
@@ -177,7 +177,7 @@ func main{range_check_ptr : felt}(){
 
 ## 4. La doble naturaleza de assert
 
-Como hemos visto, `assert` es clave para la programación en Cairo. En los ejemplos arriba lo utilizamos para confirmar una declaración, `assert y = 10`. Este es un uso común en otros lenguajes de programación como Python. Pero en Cairo cuando tratas de `assert` algo que no está asignado aún, `assert` funciona para asignar. Mira esté ejemplo adaptado del [Bootcamp de StarkNet en Amsterdam](https://github.com/lightshiftdev/starknet-bootcamp/blob/main/packages/contracts/samples/04-cairo-math.cairo) que también nos sirve para afianzar lo aprendido sobre las structs en el [tutorial pasado](2_basicos_cairo.md). El código completo está en [src/vector.cairo](../../../src/vector.cairo). 
+Como hemos visto, `assert` es clave para la programación en Cairo. En los ejemplos arriba lo utilizamos para confirmar una declaración, `assert y = 10`. Este es un uso común en otros lenguajes de programación como Python. Pero en Cairo cuando tratas de `assert` algo que no está asignado aún, `assert` funciona para asignar. Mira esté ejemplo adaptado del [Bootcamp de StarkNet en Amsterdam](https://github.com/lightshiftdev/starknet-bootcamp/blob/main/packages/contracts/samples/04-cairo-math.cairo) que también nos sirve para afianzar lo aprendido sobre las structs en el [tutorial pasado](2_basicos_cairo.md). El código completo está en [src/vector.cairo](../../../src/vector.cairo). 
 
 ```python
  %builtins output
@@ -276,14 +276,14 @@ Creamos un array de felts llamado `my_array`. Esta es la forma en que se define
 let (my_array : felt*) = alloc();
 ```
 
-Es poco intuitivo en comparación con lo fácil que es en Python y otros lenguajes. `my_array : felt*` define una variable llamada `my_array` que contendrá un pointer (ver [tutorial pasado](2_basicos_cairo.md)) a un felt (aún no definimos a qué felt). ¿Por qué? La documentación de Cairo nos ayuda:
+Es poco intuitivo en comparación con lo fácil que es en Python y otros lenguajes. `my_array : felt*` define una variable llamada `my_array` que contendrá un pointer (ver [tutorial pasado](2_basicos_cairo.md)) a un felt (aún no definimos a qué felt). ¿Por qué? La documentación de Cairo nos ayuda:
 
 > “Los arrays se pueden definir como un pointer (felt*) al primer elemento del array. A medida que se llena el array, los elementos ocupan celdas de memoria contiguas. La función alloc() se usa para definir un segmento de memoria que expande su tamaño cada vez que se escribe un nuevo elemento en el array (documentación de Cairo)”.
 > 
 
 Entonces, en el caso de `my_array`, al colocar el `alloc()` estamos indicando que el segmento de memoria al que la expresión `my_array` apunta (recuerda que `my_array` es solo el nombre de un pointer, `felt*`, en memoria) será expandido cada vez que se escriba un nuevo elemento en `my_array`.
 
-De hecho, si pasamos [al repo](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/alloc.cairo) donde se encuentra `alloc()` veremos que retorna `(ptr : felt*)`. Es decir, nos regresa una tupla de un solo miembro que es un `felt*` (un pointer a un `felt`). Por ser una tupla la recibimos con un `let` y con `my_array : felt*` entre paréntesis (ver [básicos de Cairo pt. 2](2_basicos_cairo.md     y)). Todo va haciendo sentido, ¿cierto 🙏?
+De hecho, si pasamos [al repo](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/alloc.cairo) donde se encuentra `alloc()` veremos que retorna `(ptr : felt*)`. Es decir, nos regresa una tupla de un solo miembro que es un `felt*` (un pointer a un `felt`). Por ser una tupla la recibimos con un `let` y con `my_array : felt*` entre paréntesis (ver [básicos de Cairo pt. 2](2_basicos_cairo.md)). Todo va haciendo sentido, ¿cierto 🙏?
 
 Vemos que la definición de nuestro array de matrices es exactamente igual salvo que en vez de querer un array de `felt` queremos uno de `Matrix`:
 
@@ -291,7 +291,7 @@ Vemos que la definición de nuestro array de matrices es exactamente igual salvo
 let (matrix_array : Matrix*) = alloc();
 ```
 
-Ya pasamos lo complicado 😴. Ahora veamos cómo rellenar nuestro array con structuras `Matrix`. Usamos `assert` y podemos indexar con `[]` la posición del array que queremos alterar o revisar:
+Ya pasamos lo complicado 😴. Ahora veamos cómo rellenar nuestro array con estructuras `Matrix`. Usamos `assert` y podemos indexar con `[]` la posición del array que queremos alterar o revisar:
 
 ```
 assert matrix_array[0] = Matrix(x = v1, y = v2);

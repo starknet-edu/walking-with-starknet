@@ -2,7 +2,7 @@
 
 Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [primer tutorial](1_instalacion.md), y revises los [básicos de Cairo pt. 1](2_basicos_cairo.md) y [pt. 2](3_basicos_cairo.md).
 
-Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es) con links a telegram, tutoriales, proyectos, etc.). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este.
+Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es) con links a telegram, tutoriales, proyectos, etc.). Este es el cuarto tutorial de una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este.
 
 🚀 El futuro de Ethereum es hoy y ya está aquí. Y apenas es el comienzo. Aprende un poco más sobre el ecosistema de Starkware en [este texto corto](https://mirror.xyz/espejel.eth/PlDDEHJpp3Y0UhWVvGAnkk4JsBbJ8jr1oopGZFaRilI).
 
@@ -27,7 +27,7 @@ En este tutorial aprenderemos a desplegar contratos a la devnet y la testnet. En
 
 ## 1. Instalación de Protostar
 
-En este punto ya tenemos instalado `cairo-lang`. Si no, puedes revisar [nuestro tutorial](https://medium.com/starknet-en-espa%C3%B1ol/programando-en-la-l2-de-ethereum-b%C3%A1sicos-de-cairo-pt-1-8cc6c94571f1) sobre cómo instalarlo.
+En este punto ya tenemos instalado `cairo-lang`. Si no, puedes revisar [nuestro tutorial](1_instalacion.md) sobre cómo instalarlo.
 
 En Ubuntu o MacOS (no está disponible para Windows) corre el siguiente comando:
 
@@ -173,7 +173,7 @@ Es clave que tengamos a la mano la dirección en donde está corriendo nuestra d
 
 La interacción con la devnet y la testnet es muy similar. Si quieres ver todos los argumentos disponibles en la llamada `starknet-devnet` puedes llamar `starknet-devnet --help`.
 
-## Desplegando en la devnet y testnet
+## 6. Desplegando en la devnet y testnet
 
 Utilicemos un ejemplo real. Cuando inicializamos un proyecto de Protostar, se crea automáticamente un contrato `main.cairo` en el directorio `src`. Puedes usarlo como ejemplo de un contrato para desplegar en la devnet y después en la testnet. Solo necesitas asegurarte de que en `protostar.toml` definas que será compilado. En este tutorial vamos a desplegar un contrato para un ERC721 (NFT) que se encuentra en [este repositorio](../../../src/ERC721MintableBurnable.cairo). En `protostar.toml` colocamos: 
 
@@ -235,15 +235,15 @@ Transaction hash: 0x05a2f78261444b97b155417a5734210abe2ee1081b7f12f39f660321fd10
 
 Es importante guardar el contract address pues interactuaremos con él en siguientes funciones. Esto lo revisaremos en otros tutoriales.
 
-Si desplegaste en la testnet puedes usar la contract address para interactuar con tu contrato en un block explorar: [Voyager](https://goerli.voyager.online/) o [StarkScan](https://testnet.starkscan.co/). Estos block explorers son equivalentes a [Etherscan](https://goerli.voyager.online/) para la L1.
+Si desplegaste en la testnet puedes usar la contract address para interactuar con tu contrato en un block explorer: [Voyager](https://goerli.voyager.online/) o [StarkScan](https://testnet.starkscan.co/). Estos block explorers son equivalentes a [Etherscan](https://goerli.voyager.online/) para la L1.
 
-La ventaja de desplegar en la devnet primero es que podemos interactuar mpas rápidemente con nuestros contratos. Para la testnet tendremos que esperar cerca de de minutos.
+La ventaja de desplegar en la devnet primero es que podemos interactuar más rápidamente con nuestros contratos. Para la testnet tendremos que esperar cerca de unos minutos.
 
 ## 7. Desplegando con la CLI de `starknet`
 
 Por debajo, Protostar está utilizando el CLI de `starknet` para desplegar. Hay ocasiones en las que no queremos depender completamente de Protostar, por ejemplo cuando hay una actualización de StarkNet y aún no es aplicada en la biblioteca de Protostar.
 
-Más adelate exploraremos a fondo la CLI de `starknet`. Por ahora veamos cómo desplegar exactamente el mismo contrato.
+Más adelante exploraremos a fondo la CLI de `starknet`. Por ahora veamos cómo desplegar exactamente el mismo contrato.
 
 Para la devnet, una vez que la encendiste en el gateway http://127.0.0.1:5050, sería:
 
@@ -260,7 +260,7 @@ starknet deploy --contract ./build/ERC721_original.json --inputs 274244718266563
 En ambos casos obtenemos el contract address y el transaction hash; igual que al desplegar con Protostar.
 
 
-## 7. Conclusión
+## 8. Conclusión
 
 Felicidades 🦾. ¡Acabas de dar tus primeros pasos en StarkNet! Estás aprovechando todo lo aprendido en los tutoriales pasados sobre Cairo.
 

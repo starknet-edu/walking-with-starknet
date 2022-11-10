@@ -16,7 +16,7 @@ Here is our code to add two numbers. You can paste it directly into your code ed
 
 Don't worry if you don't understand everything that's going on at this point. But [@espejelomar](https://twitter.com/espejelomar) will worry if by the end of the tutorial you don't understand every line of this code. Let me know if so because we will improve 🧐. Cairo is a low-level language so it will be more difficult than learning Python, for example. But it will be worth it 🥅. Eyes on the goal.
 
-Let's see line by line and with additional examples what we are doing. The entire program to add the two numbers is available in [src/suma.cairo](../../../src/sum.cairo). There you will find the code correctly commented.
+Let's see line by line and with additional examples what we are doing. The entire program to add the two numbers is available in [src/sum.cairo](../../../src/sum.cairo). There you will find the code correctly commented.
 
 ```python
 %builtins output
@@ -81,11 +81,11 @@ struct MyStruct{
 }
 
 ```
-So we define a new data type called `MiStruct` with the properties `primer_miembro` and `segundo_miembro`. We set the `type` of both properties to be `felt` but we may as well have put in other types. When we create a `struct` it is mandatory to add the `type`.
+We define a new data type called `MyStruct` with the properties `first_member` and `second_member`. We set the `type` of both properties to be `felt` but we may as well have put in other types. When we create a `struct` it is mandatory to add the `type`.
 
-We can create a variable of type `MiStruct`: `Nombre = (primer_miembro=1, segundo_miembro=4)`. Now the variable `Nombre` has `type` `MiStruct`.
+We can create a variable of type `MyStruct`: `Name = (first_member=1, second_member=4)`. Now the variable `Name` has `type` `MyStruct`.
 
-With `Nombre.primer_miembro` we can access the value of this argument, in this case it is 1.
+With `Name.first_member` we can access the value of this argument, in this case it is 1.
 
 ## **6. Tuples
 
@@ -118,7 +118,7 @@ The definition of a function in Cairo has the following format:
 
 ```python
 func function(arg1: felt, arg2) -> (retornado: felt){
-  // Cuerpo de la función
+  // Function body
   let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2);
   return(returned=sum);
 }
@@ -127,7 +127,7 @@ func function(arg1: felt, arg2) -> (retornado: felt){
 
 - **Define the scope of the function**. We start the function with `func`. The scope of our function is defined with curly braces {}. 
 - **Arguments and names**. We define the arguments that the function receives in parentheses next to the name that we define for our function, `function` in this case. The arguments can carry their type defined or not. In this case `arg1` must be of type `felt` and `arg2` can be of any type.
-- **Return**. We necessarily have to add `return()`. Although the function is not returning something. In this case we are returning a variable called `returned` so we put `return(retornado=suma)` where suma is the value that the `returned` variable will take.
+- **Return**. We necessarily have to add `return()`. Although the function is not returning something. In this case we are returning a variable called `returned` so we put `return(returned=sum)` where sum is the value that the `returned` variable will take.
 - **Comments**. In Cairo we comment with `//`. This code will not be interpreted when running our program.
 
 As with other programming languages. We will need a `main()` function that orchestrates the use of our program in Cairo. It is defined exactly the same as a normal function only with the name `main()`. It can come before or after the other functions we create in our program.
@@ -198,7 +198,7 @@ Thus we define a local variable: `local a = 3`.
 As an example, look at this part of our function that adds two numbers:
 
 ```python
-func sum_two_numbers(num1: felt, num2: felt) -> (sum):
+func sum_two_nums(num1: felt, num2: felt) -> (sum):
     alloc_locals
     local sum = num1+num2
     return(sum)
@@ -224,7 +224,7 @@ const NUM1 = 1
 This is the format to define one:
 
 ```python
-let ref_nombre : ref_type = ref_expr
+let ref_name : ref_type = ref_expr
 
 ```
 
@@ -237,10 +237,10 @@ let a = 7  // a is initially bound to expression 7.
 let a = 8  // a is now bound to expression 8.
 
 ```
-In our addition of two numbers we create a reference called `sum`. We see that we assign to `sum` the `felt` that the function `suma_dos_nums` returns.
+In our addition of two numbers we create a reference called `sum`. We see that we assign to `sum` the `felt` that the function `sum_two_nums` returns.
 
 ```python
-let (sum) = suma_dos_nums(num1 = NUM1, num2 = NUM2)
+let (sum) = sum_two_nums(num1 = NUM1, num2 = NUM2)
 
 ```
 
@@ -250,10 +250,10 @@ You already know how to do funtions in Cairo! Now let's run our first program.
 
 The tools that StarkNet offers to interact with the command line are many 🙉. We won't go into detail until later. For now, we will only show the commands with which we can run the application that we created in this tutorial 🧘‍♀️. But don't worry, the commands to run other applications will be very similar.
 
-`cairo-compile` allows us to compile our code and export a json that we will read in the next command. If ours is called `src/suma.cairo` (because it is located in the `src` directory as in this repository) and we want the json to be called `build/sum.json` (because it's in the `build` directory like this repository) then we would use the following code:
+`cairo-compile` allows us to compile our code and export a json that we will read in the next command. If ours is called `src/sun.cairo` (because it is located in the `src` directory as in this repository) and we want the json to be called `build/sum.json` (because it's in the `build` directory like this repository) then we would use the following code:
 
 ```
-cairo-compile src/suma.cairo --output build/suma.json`
+cairo-compile src/sum.cairo --output build/sum.json`
 ```
 
 Simple, right? ❤️
@@ -261,18 +261,18 @@ Simple, right? ❤️
 Ok now let's run our program with `cairo-run`.
 
 ```
-cairo-run --program=build/suma.json --print_output --layout=small
+cairo-run --program=build/sum.json --print_output --layout=small
 ```
 
 The result should correctly print an 11 in our terminal.
 
 Here the details:
 
-We indicate in the --program argument that we want to run the build/suma.json that we generated earlier.
+We indicate in the `--program` argument that we want to run the `build/sum.json` that we generated earlier.
 
-With --print_output we indicate that we want to print something from our program to the terminal. For example, in the next tutorial we will use the builtin (we will study them later) output and the serialize_word function to print to the terminal.
+With `--print_output` we indicate that we want to print something from our program to the terminal. For example, in the next tutorial we will use the builtin (we will study them later) output and the serialize_word function to print to the terminal.
 
---layout allows us to indicate the layout to use. Depending on the builtins we use, it will be the layout to use. Later we will be using the output builtin and for this we need the small layout. If we will not use any builtin then we can leave this argument empty so we would use the default layout, the plain layout.
+`--layout` allows us to indicate the layout to use. Depending on the builtins we use, it will be the layout to use. Later we will be using the output builtin and for this we need the small layout. If we will not use any builtin then we can leave this argument empty so we would use the default layout, the plain layout.
 
 ## **14. Conclusion**
 

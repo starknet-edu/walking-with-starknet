@@ -4,7 +4,7 @@ Este tutorial es clave para que comiences a crear y desplegar tus propios contra
 
 Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [primer tutorial](1_instalacion.md), revises los [básicos de Cairo pt. 1](2_basicos_cairo.md) y [pt. 2](3_basicos_cairo.md), y uses [Protostar para compilar y desplegar contratos](4_protostar.md).
 
-Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es) con links a telegram, tutoriales, proyectos, etc.). Este es el cuarto tutorial en una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este.
+Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es) con links a telegram, tutoriales, proyectos, etc.). Este es el quinto tutorial de una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este.
 
 🚀 El futuro de Ethereum es hoy y ya está aquí. Y apenas es el comienzo. Aprende un poco más sobre el ecosistema de Starkware en [este texto corto](https://mirror.xyz/espejel.eth/PlDDEHJpp3Y0UhWVvGAnkk4JsBbJ8jr1oopGZFaRilI).
 
@@ -93,7 +93,7 @@ Aprenderemos sobre varias primitivas (marcadas con un `@`, como decoradores de P
 
 ## 3. Contract storage
 
-¿Qué es el espacio de almenamiento de un contrato (contract storage)? Veamos la documentación:
+¿Qué es el espacio de almacenamiento de un contrato (contract storage)? Veamos la documentación:
 
 > “El espacio de almacenamiento del contrato (contract storage) es un espacio de almacenamiento persistente donde se puede leer, escribir, modificar y conservar datos. El almacenamiento es un mapa con 2^{251} ranuras (slots), donde cada ranura es un felt que se inicializa en 0.” - Documentación de StarkNet.
 > 
@@ -128,7 +128,7 @@ También podemos usar las funciones `storage_read(key)` y `storage_write(key, va
 
 ## 4. Los tres argumentos implícitos más usados
 
-Pasemos al siguiente fragmento de código de nuestro contrato para votar (el código comentado lo encuentras en el [repositorio del tutorial](../../../src/voting.cairo)). En esta sección hablaremos de tres de los argumentos implícitos más frecuentes que encontrarás en contratos de StarkNet. Los tres son muy usados porque son requeridos por las storage variables para escribir y leer del especio de almacenamiento del contrato.
+Pasemos al siguiente fragmento de código de nuestro contrato para votar (el código comentado lo encuentras en el [repositorio del tutorial](../../../src/voting.cairo)). En esta sección hablaremos de tres de los argumentos implícitos más frecuentes que encontrarás en contratos de StarkNet. Los tres son muy usados porque son requeridos por las storage variables para escribir y leer del espacio de almacenamiento del contrato.
 
 Creamos la función interna `_register_voters` (por default todas las funciones en StarkNet son privadas, a diferencia de Solidity). Con ella prepararemos nuestra lista de votantes. Asumimos que tenemos una lista de las addresses que tienen permitido votar. `_register_voters` usa la storage variable `voter_info` para asignar a cada address el estado de su votación: si tiene permitido votar.
 
@@ -218,7 +218,7 @@ func _assert_allowed{
 
 Importamos `assert_not_zero`. El error regresará un mensaje si `assert_not_zero(info.allowed)` es falso. Recuerda que si un votante tiene permitido votar entonces `info.allowed` será 1.
 
-## 6. Funciones external y view
+## 6. External y view functions
 
 Pasemos a la función principal de nuestra aplicación. Escribimos una función que recibe como argumento explícito un voto (1 o 0) y luego actualiza el conteo de votos total y el estado del votante de forma que no pueda votar de nuevo.
 
@@ -303,7 +303,7 @@ func get_voter_status{
 }
 ```
 
-**Funciones view.** Usando el decorator `@view` definimos a una función como view. Otros contratos (incluidas accounts) pueden leer del estado del contrato; no pueden modificarlo (nota que las external sí pueden modificarlo). !Leer del storage no cuesta gas!
+**Funciones view.** Usando el decorator `@view` definimos a una función como view. Otros contratos (incluidas accounts) pueden leer del estado del contrato; no pueden modificarlo (nota que las external sí pueden modificarlo). ¡Leer del storage no cuesta gas!
 
 Nota que en Solidity el compilador crea getters para todas las variables de estado declaradas como public, en Cairo todas las storage variables son privadas. Por lo tanto, si queremos hacer públicas las storage variables, debemos hacer una funciones getter nosotros mismos.
 

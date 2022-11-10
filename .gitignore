@@ -138,6 +138,7 @@ tutorials/tutorials/ES/6_openzeppelin.md
 tutorials/tutorials/ES/7_randomness.md
 tutorials/tutorials/ES/8_starknetpy.md
 tutorials/tutorials/ES/6_starknet_CLI.md
+tutorials/tutorials/EN/7_ account_abstraction.md
 src/DICEeliminar.cairo
 src/randomERC721.cairo
 scripts/
@@ -146,6 +147,9 @@ build/*
 migrations/*.json
 assets
 assets/*
+src/erase/
+src/first_account_contract.cairo
+starknet-accounts/
 
 
 # private key

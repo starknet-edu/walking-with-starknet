@@ -8,12 +8,12 @@ libs_path = "lib"
 vote = [
     "src/voting.cairo",
 ]
-ERC721_original = [
-    "src/ERC721MintableBurnable.cairo",
-]
-# randomERC721 = [
-#     "src/randomERC721.cairo",
+# ERC721_original = [
+#     "src/ERC721MintableBurnable.cairo",
 # ]
+account = [
+    "src/erase/1.cairo",
+]
 
 # https://github.com/Shard-Labs/starknet-devnet
 [profile.devnet.protostar.deploy]
