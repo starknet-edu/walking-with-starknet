@@ -2,7 +2,7 @@
 
 Este tutorial es clave para que comiences a crear y desplegar tus propios contratos inteligentes. Ese es el objetivo aquí.
 
-Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [primer tutorial](1_instalacion.md), revises los [básicos de Cairo pt. 1](2_basicos_cairo.md) y [pt. 2](3_basicos_cairo.md), y uses [Protostar para compilar y desplegar contratos](4_protostar.md).
+Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [primer tutorial](1_installation.md), revises los [básicos de Cairo pt. 1](2_cairo_basics.md) y [pt. 2](3_cairo_basics.md), y uses [Protostar para compilar y desplegar contratos](4_protostar.md).
 
 Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es) con links a telegram, tutoriales, proyectos, etc.). Este es el quinto tutorial de una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este.
 

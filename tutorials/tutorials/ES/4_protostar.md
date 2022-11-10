@@ -1,6 +1,6 @@
 # Programando en la L2 de Ethereum (pt. 4): Protostar y desplegando contratos
 
-Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [primer tutorial](1_instalacion.md), y revises los [básicos de Cairo pt. 1](2_basicos_cairo.md) y [pt. 2](3_basicos_cairo.md).
+Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [primer tutorial](1_installation.md), y revises los [básicos de Cairo pt. 1](2_cairo_basics.md) y [pt. 2](3_cairo_basics.md).
 
 Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es) con links a telegram, tutoriales, proyectos, etc.). Este es el cuarto tutorial de una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. Recomiendo que hagas los tutoriales pasados antes de pasar a este.
 
@@ -112,7 +112,7 @@ En el pasado hemos estado compilando nuestros contratos con `cairo-compile`. Cua
 
 En Protostar podemos compilar todos nuestros contratos de StarkNet a la vez con `protostar build`. Pero antes debemos indicar en la sección `[“protostar.contracts”]` de `protostar.toml` los contratos que queremos compilar (o build). Imagina que tenemos un contrato `ERC721MintableBurnable.cairo` en nuestra carpeta `src` (donde están los contratos).
 
-> Nota: No lograrás compilar código de Cairo puro utilizando `protostar build`. Solamente es para contratos de StarkNet (tienen la señal `%lang starknet` al comienzo). Para compilar y correr aplicaciones de Cairo puro necesitas usar `cairo-compile` y `cairo-run` ([ver tutorial de Cairo](3_basicos_cairo.md)). En siguientes tutoriales aprenderemos cómo crear contratos de StarkNet.
+> Nota: No lograrás compilar código de Cairo puro utilizando `protostar build`. Solamente es para contratos de StarkNet (tienen la señal `%lang starknet` al comienzo). Para compilar y correr aplicaciones de Cairo puro necesitas usar `cairo-compile` y `cairo-run` ([ver tutorial de Cairo](3_cairo_basics.md)). En siguientes tutoriales aprenderemos cómo crear contratos de StarkNet.
 
 Colocamos en `protostar.toml` que queremos compilar el contrato en `src/ERC721MintableBurnable.cairo` y que lo queremos llamar `ERC721_original`:
 

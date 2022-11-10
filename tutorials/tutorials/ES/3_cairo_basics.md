@@ -1,6 +1,6 @@
 # Programando en la L2 de Ethereum (pt. 3): Básicos de Cairo 2
 
-Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [primer tutorial](1_instalacion.md), y revises los [básicos de Cairo pt. 1](2_basicos_cairo.md).
+Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo ❤️ con el [primer tutorial](1_installation.md), y revises los [básicos de Cairo pt. 1](2_cairo_basics.md).
 
 Únete a la comunidad de habla hispana de StarkNet ([Linktree](https://linktr.ee/starknet_es) con links a telegram, tutoriales, proyectos, etc.). Este es el tercer tutorial de una serie enfocada en el desarrollo de smart cotracts con Cairo y StarkNet. 
 
@@ -8,7 +8,7 @@ Antes de comenzar, te recomiendo que prepares tu equipo para programar en Cairo 
 
 ---
 
-En la tercera parte de la serie de tutoriales básicos de Cairo profundizaremos en conceptos introducidos en la [segunda sesión](https://github.com/starknet-edu/walking-with-starknet/blob/master/tutorials/tutorials/ES/2_basicos_cairo.md) como los `builtin`, los `felt` y `assert` y sus variaciones. Además, introduciremos los arrays. Con lo aprendido en esta sesión seremos capaces de crear contratos básicos en Cairo 🚀.
+En la tercera parte de la serie de tutoriales básicos de Cairo profundizaremos en conceptos introducidos en la [segunda sesión](https://github.com/starknet-edu/walking-with-starknet/blob/master/tutorials/tutorials/ES/2_cairo_basics.md) como los `builtin`, los `felt` y `assert` y sus variaciones. Además, introduciremos los arrays. Con lo aprendido en esta sesión seremos capaces de crear contratos básicos en Cairo 🚀.
 
 ## 1. Los builtin y su relación con los pointers
 
@@ -177,7 +177,7 @@ func main{range_check_ptr : felt}(){
 
 ## 4. La doble naturaleza de assert
 
-Como hemos visto, `assert` es clave para la programación en Cairo. En los ejemplos arriba lo utilizamos para confirmar una declaración, `assert y = 10`. Este es un uso común en otros lenguajes de programación como Python. Pero en Cairo cuando tratas de `assert` algo que no está asignado aún, `assert` funciona para asignar. Mira esté ejemplo adaptado del [Bootcamp de StarkNet en Amsterdam](https://github.com/lightshiftdev/starknet-bootcamp/blob/main/packages/contracts/samples/04-cairo-math.cairo) que también nos sirve para afianzar lo aprendido sobre las structs en el [tutorial pasado](2_basicos_cairo.md). El código completo está en [src/vector.cairo](../../../src/vector.cairo). 
+Como hemos visto, `assert` es clave para la programación en Cairo. En los ejemplos arriba lo utilizamos para confirmar una declaración, `assert y = 10`. Este es un uso común en otros lenguajes de programación como Python. Pero en Cairo cuando tratas de `assert` algo que no está asignado aún, `assert` funciona para asignar. Mira esté ejemplo adaptado del [Bootcamp de StarkNet en Amsterdam](https://github.com/lightshiftdev/starknet-bootcamp/blob/main/packages/contracts/samples/04-cairo-math.cairo) que también nos sirve para afianzar lo aprendido sobre las structs en el [tutorial pasado](2_cairo_basics.md). El código completo está en [src/vector.cairo](../../../src/vector.cairo). 
 
 ```python
  %builtins output
@@ -276,14 +276,14 @@ Creamos un array de felts llamado `my_array`. Esta es la forma en que se define
 let (my_array : felt*) = alloc();
 ```
 
-Es poco intuitivo en comparación con lo fácil que es en Python y otros lenguajes. `my_array : felt*` define una variable llamada `my_array` que contendrá un pointer (ver [tutorial pasado](2_basicos_cairo.md)) a un felt (aún no definimos a qué felt). ¿Por qué? La documentación de Cairo nos ayuda:
+Es poco intuitivo en comparación con lo fácil que es en Python y otros lenguajes. `my_array : felt*` define una variable llamada `my_array` que contendrá un pointer (ver [tutorial pasado](2_cairo_basics.md)) a un felt (aún no definimos a qué felt). ¿Por qué? La documentación de Cairo nos ayuda:
 
 > “Los arrays se pueden definir como un pointer (felt*) al primer elemento del array. A medida que se llena el array, los elementos ocupan celdas de memoria contiguas. La función alloc() se usa para definir un segmento de memoria que expande su tamaño cada vez que se escribe un nuevo elemento en el array (documentación de Cairo)”.
 > 
 
 Entonces, en el caso de `my_array`, al colocar el `alloc()` estamos indicando que el segmento de memoria al que la expresión `my_array` apunta (recuerda que `my_array` es solo el nombre de un pointer, `felt*`, en memoria) será expandido cada vez que se escriba un nuevo elemento en `my_array`.
 
-De hecho, si pasamos [al repo](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/alloc.cairo) donde se encuentra `alloc()` veremos que retorna `(ptr : felt*)`. Es decir, nos regresa una tupla de un solo miembro que es un `felt*` (un pointer a un `felt`). Por ser una tupla la recibimos con un `let` y con `my_array : felt*` entre paréntesis (ver [básicos de Cairo pt. 2](2_basicos_cairo.md)). Todo va haciendo sentido, ¿cierto 🙏?
+De hecho, si pasamos [al repo](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/alloc.cairo) donde se encuentra `alloc()` veremos que retorna `(ptr : felt*)`. Es decir, nos regresa una tupla de un solo miembro que es un `felt*` (un pointer a un `felt`). Por ser una tupla la recibimos con un `let` y con `my_array : felt*` entre paréntesis (ver [básicos de Cairo pt. 2](2_cairo_basics.md)). Todo va haciendo sentido, ¿cierto 🙏?
 
 Vemos que la definición de nuestro array de matrices es exactamente igual salvo que en vez de querer un array de `felt` queremos uno de `Matrix`:
 
