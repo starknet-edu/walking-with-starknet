@@ -20,13 +20,12 @@ const VOTING_ADDRESS_2 = 0x02cdAb749380950e7a7c0deFf5ea8eDD716fEb3a2952aDd4E5659
 // protostar migrate migrations/migration_voting.cairo --gateway-url "http://127.0.0.1:5050/" --chain-id "1" --private-key-path pkey --account-address 0x02c7e70bbd22095ad396f13e265ef18fc78257957e3f4e7b897cd9b9e8da3e77
 @external
 func up() {
+    tempvar before_voting_status: felt;
+    tempvar after_voting_status: felt;
+    tempvar votes_yes: felt;
+    tempvar votes_no: felt;
 
-    tempvar before_voting_status : felt;
-    tempvar after_voting_status : felt;
-    tempvar votes_yes : felt;
-    tempvar votes_no : felt;
-
-    %{  
+    %{
         # Deploy voting contract. Wait for acceptance of in the testnet
         voting_contract_address = deploy_contract(
             contract="./build/vote.json", 
@@ -48,9 +47,9 @@ func up() {
 
     %{
         from console import fg
-        
+
         print(fg.green, fx.italic, f"Voter with address {ids.VOTING_ADDRESS_1} is allowed to vote.", fx.end, sep='')
-        
+
         # Vote 1 with the address calling the voting contract (see migration code in CLI)
         invoke(
             contract_address=voting_contract_address,
@@ -90,7 +89,7 @@ func up() {
     // Assert we have 1 YES and 0 NOs.
     assert 1 = votes_yes;
     assert 0 = votes_no;
-     
+
     return ();
 }
 

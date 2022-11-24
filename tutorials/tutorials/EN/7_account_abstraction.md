@@ -146,9 +146,9 @@ Transaction hash: 0x3dc6e579d7b4204907de859d1a12e42132853b9827e7203487740d51e957
 
 Please note currently the StarkNet CLI only works with the [OpenZeppelin account contract](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/starknet/third_party/open_zeppelin/Account.cairo). If we want to deploy our own account contracts we need to deploy them using a different method. More on the next sections. 
 
-Now let us create our own account contracts.
+Now we will examine the inner workings of the Open Zeppelin contract and proceed create our own account contracts.
 
-### Coding our own account contract
+### Using the Open Zeppelin standards
 
 Although account contracts are nothing more than smart contracts, they have methods that set them apart from other smart contracts. This is the [Open Zeppelin IAccount contract interface](https://github.com/OpenZeppelin/cairo-contracts/blob/release-v0.4.0b/src/openzeppelin/account/IAccount.cairo) adopted also by Argent (it implements [EIP-1271](https://eips.ethereum.org/EIPS/eip-1271)):
 
@@ -279,20 +279,113 @@ struct AccountCallArray {
 Where:
 * `to` and `selector` are the same as in `Call`.
 * `data_offset` is the starting position of the calldata array that holds the `Call`'s calldata.
-* `data_len is` the number of calldata elements in the `Call`.
+* `data_len` is the number of calldata elements in the `Call`.
 
 
-## The Open Zeppelin Account Contract
+## Counterfactual deployment from inside
 
-starknet-compile --account_contract src/first_account_contract.cairo --output build/first_account_contract_compiled.json --abi build/first_account_contract_compiled_abi.json
+Let us deploy the default account contract, inspired by the Open Zeppelin implementation, with alias `second-account`, to the Goerli 2 testnet. The  `--wallet starkware.starknet.wallets.open_zeppelin.OpenZeppelinAccount` flag indicates we will use the default account contract, currently we can only use this contract with the CLI.
 
-starknet declare --contract build/first_account_contract_compiled.json --network alpha-goerli --no_wallet
+```Bash
+starknet new_account --feeder_gateway_url https://alpha4-2.starknet.io --gateway_url https://alpha4-2.starknet.io --network_id 1536727068981429685321 --account second-account --wallet starkware.starknet.wallets.open_zeppelin.OpenZeppelinAccount
+```
 
-protostar declare build/first_account_contract_compiled.json --network testnet
+We get:
 
-protostar deploy build/first_account_contract_compiled.json --network testnet
+```Bash
+Account address: 0x02b0fc135cae406bbc27766c189972dd3aae5fc79a66d5191a8d6ac76a0ce8f9
+Public key: 0x066ed5a84f995a2dcd714b505dc165a8df71473ebc374dbe5fe973631198ba72
+Move the appropriate amount of funds to the account, and then deploy the account
+by invoking the 'starknet deploy_account' command.
+
+NOTE: This is a modified version of the OpenZeppelin account contract. The signature is computed
+differently.
+```
+
+[OPTIONAL] We can go deeper into examining the default Open Zeppelin account contract to get the class hash, salt and constructor calldata that are used to calculate its address. [`src/utils/contract_address.py`](../../../src/utils/contract_address.py) is a copy of the [`contract_address.py`](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/starknet/core/os/contract_address/contract_address.py) library from the Starkware library. We added print statements in the `calculate_contract_address()` function to get the class hash, salt, and constructor calldata. If you wish to use it, go to where your OS stores your Python packages (likely `site-packages`) and replace `/starkware/starknet/core/os/contract_address/contract_address.py` with our [`src/utils/contract_address.py`](../../../src/utils/contract_address.py). Then, when we defined our account contract with `starknet new_account ...` we also get:
+
+```Bash
+Class Hash: 895370652103566112291566439803611591116951595367594863638369163604569619773
+Salt: 462250451139519919709009935198618602877233823783070820758189518720702799406
+Constructor calldata: [2909704878250883580952868877137725986814034606621060536770963048574421088882]
+```
+
+All three properties are in felt format. You can manually convert them into their hex representations, if you wish, with the [stark-utils](https://www.stark-utils.xyz/converter) converter. The Open Zeppelin default account contract requires a public key in its constructor ([see implementation](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/starknet/third_party/open_zeppelin/Account.cairo#L105)), if we wish, with our own account contracts, we can not add this requirement. The contract we defined above has a public key `0x066ed5a84f995a2dcd714b505dc165a8df71473ebc374dbe5fe973631198ba72` once we converted the above felt into hex format.
+
+Calculating the address is the key of this first step in counterfactual deployment. Remember, it has not yet been deployed, we only calculated the address and added this new account to the `.starknet_accounts/starknet_open_zeppelin_accounts.json` file. It is key to closely follow the `starknet_open_zeppelin_accounts.json` since there we can find our created account contracts; you will find it in your root directory, for example, `/Users/espejelomar/.starknet_accounts/starknet_open_zeppelin_accounts.json`. `starknet_open_zeppelin_accounts.json` shows relevant information for the creation of each account contract. For example, for the `first-account` we created previously we have:
+
+```Bash
+"1536727068981429685321": {
+        "second-account": {
+            "private_key": "XXX",
+            "public_key": "0x66ed5a84f995a2dcd714b505dc165a8df71473ebc374dbe5fe973631198ba72",
+            "salt": "0x1059fde2a4da7c421dd6dbe8af873a2977c6008c7a09e61db1c5a45d25ede2e",
+            "address": "0x2b0fc135cae406bbc27766c189972dd3aae5fc79a66d5191a8d6ac76a0ce8f9",
+            "deployed": false
+        }
+    },
+```
+`1536727068981429685321` is the chain_id for goerli. Note it says `"deployed": false` since we have not deployed the contract. 
+
+If we use the same compiled code, salt (this is the main function of the salt), and constructor call data then we should be able to calculate the same address. The `get_address` function in [`src/utils/accounts_utils.py`](../../../src/utils/accounts_utils.py) (next step: create a new library for helping users more easily create account contracts 🚀) is able to calculate the address of any contract without deploying it. We will get the same address for the Open Zeppelin account contract if we get into Python mode in our terminal, `python3.9 -i src/utils/accounts_utils.py` (I am using `python 3.9`), and call (notice we reuse the `salt` and `constructor_calldata` we got above, and that we are using the compiled code of the default Open Zeppelin account contract in [`assets/compiled_open_zeppeling_account_contract.json`](../../../assets/compiled_open_zeppeling_account_contract.json).
+
+```Python
+get_address(
+    contract_path_and_name = "assets/compiled_open_zeppeling_account_contract.json",
+    salt = 462250451139519919709009935198618602877233823783070820758189518720702799406,
+    constructor_calldata = [2909704878250883580952868877137725986814034606621060536770963048574421088882],
+    deployer_address = 0,
+    compiled = True,
+)
+```
+
+We get:
+
+```Bash
+Account contract address: 0x02b0fc135cae406bbc27766c189972dd3aae5fc79a66d5191a8d6ac76a0ce8f9
+Class contract hash: 0x01fac3074c9d5282f0acc5c69a4781a1c711efea5e73c550c5d9fb253cf7fd3d
+Salt: 0x01059fde2a4da7c421dd6dbe8af873a2977c6008c7a09e61db1c5a45d25ede2e
+Constructor call data: [2909704878250883580952868877137725986814034606621060536770963048574421088882]
+
+Move the appropriate amount of funds to the account. Then deploy the account.
+```
+
+Everything matches, including the account contract address, to our calculation using `starknet new_account ...`. Great! We now know how we are able to calculate addresses before deploying. This is the most important part of counter factual deployment.
+
+Let's fund the calculated address. We can do this by bridging Goerli ETH from L1 to Goerli 2 in the L2. First, fund your L1 wallet with Goerli ETH (you can use the [Paradigm faucet](https://faucet.paradigm.xyz/api/auth/signin)). Now go into the [Goerli 2 contract in the L1](https://goerli.etherscan.io/address/0xaea4513378eb6023cf9ce730a26255d0e3f075b9#writeProxyContract) and in the external `deposit` function write the amount of ETH you wish to bridge and L2 recipient (our calculated contract address: 0x02b0fc135cae406bbc27766c189972dd3aae5fc79a66d5191a8d6ac76a0ce8f9). Now this contract can pay for its own deployment.
+
+We deploy the account contract to Goerli 2 using Protostar. Add (1) as input the constructor calldata, and (2) as salt our value we had before. If we do not specificate the salt value then Protostar generates a random value and we won´t deploy into our defined contract address.
+
+```Bash
+protostar deploy assets/compiled_open_zeppeling_account_contract.json --inputs 2909704878250883580952868877137725986814034606621060536770963048574421088882 --salt 462250451139519919709009935198618602877233823783070820758189518720702799406 --gateway-url https://alpha4-2.starknet.io --chain-id 1536727068981429685321
+```
+
+We get:
+
+```Bash
+[INFO] Deploy transaction was sent.
+Contract address: 0x02b0fc135cae406bbc27766c189972dd3aae5fc79a66d5191a8d6ac76a0ce8f9
+Transaction hash: 0x070326e2bed2746fe92847eacf9d04a05cf7b943369afb99f4ad09839f0281c0
+```
+
+The contract address is still the same. And now our contract is [deployed in Goerli 2](https://testnet-2.starkscan.co/contract/0x02b0fc135cae406bbc27766c189972dd3aae5fc79a66d5191a8d6ac76a0ce8f9#overview). Inside StarkScan go to the Portfolio tab to see the ETH we transferred to this address before the deployment.
+
+Now we dominate the Open Zeppelin account contract and how to counterfactually deploy it.
+
 
 ## Examples
+
+Get the nonce with 
+
+```Bash
+starknet get_nonce --contract_address 0x02b0fc135cae406bbc27766c189972dd3aae5fc79a66d5191a8d6ac76a0ce8f9 --feeder_gateway_url https://alpha4-2.starknet.io --gateway_url https://alpha4-2.starknet.io --network_id 1536727068981429685321
+```
+
+This returns a `0`. What is a nonce? A sequential number attached to the account contract, that prevents transaction replay and guarantees the order of execution and uniqueness of the transaction hash.
+
+
+
+
 *********
 **WIP**
 *********
