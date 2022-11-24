@@ -107,7 +107,7 @@ differently.
 
 Now we have the account contract's address (([this is the line](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/starknet/wallets/open_zeppelin.py#L107) where the address is calculated in the repo)) that we can fund; if using the testnet we can use the [faucet](https://faucet.goerli.starknet.io/). We are using the default account contract structure created by Open Zeppelin (a bit modified) which you can find in the [third_party library](https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/starknet/third_party/open_zeppelin/Account.cairo). In the next sections we will create our own account contracts. 
 
-1. Send funds to that address, eventhough it has no contract yet (it has not yet been deployed);
+2. Send funds to that address, eventhough it has no contract yet (it has not yet been deployed);
 
 For example, we can send funds using the [testnet faucet](https://faucet.goerli.starknet.io/).
 
@@ -372,6 +372,10 @@ The contract address is still the same. And now our contract is [deployed in Goe
 
 Now we dominate the Open Zeppelin account contract and how to counterfactually deploy it.
 
+*********
+**WIP** DISREGARD THE FOLLOWING
+*********
+
 
 ## Examples
 
@@ -386,11 +390,7 @@ This returns a `0`. What is a nonce? A sequential number attached to the account
 
 
 
-*********
-**WIP**
-*********
 
-### Deploying
 
 Unlike Ethereum [EOAs](https://ethereum.org/en/developers/docs/accounts/#externally-owned-accounts-and-key-pairs), StarkNet accounts don't have a hard requirement on being managed by a public/private key pair.
 
