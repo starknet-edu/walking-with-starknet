@@ -35,6 +35,7 @@ En Ethereum y otras L1, los usuarios pierden sus claves y frases de recuperació
 
 
 ## Casos de uso (algunos de ellos, ¡inventa uno!)
+
 AA promete poner capacidad de programación en cada billetera Ethereum y desbloquear nuevas fronteras tanto para desarrolladores como para usuarios ([Panel AA, Devcon 6](https://app.devcon.org/schedule/9mvqce)).
 
 Entre otras cosas, AA permite:
@@ -57,20 +58,13 @@ Hay muchas formas en que AA ayuda a la seguridad en Ethereum. [Yoav en Devcon 6]
 * Diferentes políticas de seguridad para diferentes tipos de usuarios: Con EOAs (L1) solo tenemos una única política; si tienes la llave entonces haz algo si no la tienes entonces no puedes hacer nada. Con AA, por ejemplo, podríamos crear un esquema de seguridad para cuentas empresariales y otro para usuarios individuales. De nuevo, copia buenas prácticas en el sector bancario y web2.
 * Diferentes políticas de seguridad para diferentes dispositivos: Por ejemplo, un teléfono puede enviar una cantidad máxima de tokens y una computadora tiene un límite a menos que lo valides de alguna manera (2FA). Para que esto suceda, debemos poder implementar diferentes esquemas de firma según cada dispositivo (por ejemplo, una computadora no usa la misma curva que un teléfono Android). Los EOA solo admiten un tipo de curva que es incompatible con la mayoría de los dispositivos. Con AA puedes usar varios dispositivos con la misma cuenta. Los usuarios ya no tendrán una billetera diferente en cada dispositivo; uno para la computadora, uno para el teléfono, uno para el Ledger.
 
-## Seguridad
+## ¿Por qué aún no se ha implementado en la L1 de Ethereum?
 
-Hay mis formas en que AA ayuda a la seguridad en Ethereum. [Yoav en Devcon 6] (https://app.devcon.org/schedule/9mvqce) mencionó lo siguiente:
+Según Julien Niset ([2022](https://www.argent.xyz/blog/part-2-wtf-is-account-abstraction/)), la clave es eliminar los EOA. Ningún EIP ha abordado esto todavía. Es comprensible ya que esto implicaría múltiples cambios en el corazón del protocolo; y día a día, a medida que aumenta el valor asegurado por Ethereum, la implementación de AA se vuelve más difícil debido a la coordinación requerida([Julien Niset, 2022](https://www.argent.xyz/blog/part-2-wtf-is-account-abstraction/)).
 
-* Manejo de claves: Poder agregar dispositivos a tu billetera para que tu billetera no se asocie con la frase semilla, pero si pierdes tu ohone puedes acceder con tu computadora. Esto mejora la seguridad,
-* Diferentes esquemas de firma y validación: podría, por ejemplo, gastar pequeñas cantidades libremente, pero si está enviando una gran cantidad, la dapp o la billetera podrían solicitar otro tipo de firma similar a la Autorización de 2 factores. Esto es común en intercambios centralizados.
-* Diferentes políticas de seguridad para diferentes tipos de usuarios: Con EOAs (L1) solo tenemos una única política; si tienes la llave entonces haz algo si no la tienes entonces no puedes hacer nada. Con AA, por ejemplo, podríamos crear un esquema de seguridad para cuentas empresariales y otro para usuarios individuales. De nuevo, copia buenas prácticas en el sector bancario y web2.
-* Diferentes políticas de seguridad para diferentes dispositivos: Por ejemplo, un teléfono puede enviar una cantidad máxima de tokens y una computadora tiene un límite a menos que lo valides de alguna manera (2FA). Para que esto suceda, debemos poder implementar diferentes esquemas de firma según cada dispositivo (por ejemplo, una computadora no usa la misma curva que un teléfono Android). Los EOA solo admiten un tipo de curva que es incompatible con la mayoría de los dispositivos. Con AA puedes usar varios dispositivos con la misma cuenta. Los usuarios ya no tendrán una billetera diferente en cada dispositivo; uno para la computadora, uno para el teléfono, uno para el Ledger.## Why has it not been implemented in Ethereum's L1 yet?
+Si es tan importante, ¿por qué Ethereum ya lo admite? Este es un ejemplo de las limitaciones de la EVM que pueden ser superadas por una nueva Máquina Virtual como la Cairo VM. Se han hecho propuestas para implementar AA desde los primeros días de Ethereum y constantemente han sido "rechazadas repetidamente a favor de cambios más urgentes". ([Julien Niset, 2022](https://www.argent.xyz/blog/part-2-wtf-is-account-abstraction/)). No está claro que se implementará en las próximas versiones de Ethereum, incluso después de la fusión.
 
-According to Julien Niset ([2022](https://www.argent.xyz/blog/part-2-wtf-is-account-abstraction/)), the key is to eliminate EOAs. No EIP has yet addressed this. It is understandable since this would implicate multiple changes to the heart of the protocol; and day by day, as the value secured by Ethereum increases, implementing AA gets more difficult due to the coordination required ([Julien Niset, 2022](https://www.argent.xyz/blog/part-2-wtf-is-account-abstraction/)).
-
-If it is so important, then why does Ethereum already supports it? This is an example of the limitations of the EVM that can be surpased by a new Virtual Machine such as the Cairo VM. Proposals to implement AA have been made since the early days of Ethereum and they have constantly been "repeatedly pushed back in favour of more urgent changes." ([Julien Niset, 2022](https://www.argent.xyz/blog/part-2-wtf-is-account-abstraction/)). It is uncertain it will be implemented in next Ethereum versions even after the Merge.
-
-The creation of new L2 VMs focused on scalability allowed for advances in its implementation; StarkNet and ZKSync have native AA inspired by EIP4337, considered the best proposal by experts such as Argent's Julien Niset ([2022](https://www.argent.xyz/blog/part-2-wtf-is-account-abstraction/)). It seems as if key proponents of AA, like Julien, have lost hope that EOAs are eliminated and AA is implemented at the core of Ethereum; Argent is now pushing for the widespread adoption of AA trough L2s like StarkNet.
+La creación de nuevas VM L2 enfocadas en la escalabilidad permitió avanzar en su implementación; StarkNet y ZKSync cuentan con AA nativa inspirada en EIP4337, considerada la mejor propuesta por expertos como Julien Niset de Argent ([2022](https://www.argent.xyz/blog/part-2-wtf-is-account-abstraction/)). Parece que los defensores clave de AA, como Julien, han perdido la esperanza de que se eliminen los EOA y se implemente AA en el núcleo de Ethereum; Argent ahora está impulsando la adopción generalizada de AA a través de L2 como StarkNet.
 
 
 ## AA ya está aquí, disfrútalo!
