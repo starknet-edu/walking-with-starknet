@@ -15,7 +15,7 @@ Learn your way to Ethereum scalability; step by step and in community.
 |  English  |  [ `tutorials/EN` ](https://github.com/starknet-edu/walking-with-starknet/tree/master/tutorials/tutorials/EN) | @[omarespejel](https://github.com/omarespejel)  |
 |  Spanish  | [ `tutorials/ES` ](https://github.com/starknet-edu/walking-with-starknet/tree/master/tutorials/tutorials/ES) | @[omarespejel](https://github.com/omarespejel)  |
 | Potuguese | [ `tutorials/PT` ](https://github.com/starknet-edu/walking-with-starknet/tree/master/tutorials/tutorials/PT) | @[omarespejel](https://github.com/omarespejel)  |
-| Ukrainian | [ `tutorials/UA` ](https://github.com/starknet-edu/walking-with-starknet/tree/master/tutorials/tutorials/UA) | @[panda4us](https://github.com/panda4us)  |
+| Ukrainian | [ `tutorials/UA` ](https://github.com/panda4us/walking-with-starknet/tree/master/tutorials/tutorials/UA) | @[panda4us](https://github.com/panda4us)  |
 
 Our goal is to reach as many developers in Cairo as possible. Open a PR if you want to translate into your own language.
 
